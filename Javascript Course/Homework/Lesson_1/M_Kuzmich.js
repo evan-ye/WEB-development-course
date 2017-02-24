@@ -4,7 +4,7 @@ function getCentury(year) {
 		alert(year + " год это " + century + " век")
 	}
 	else{
-		alert('bad')
+		alert('Год указан не правильно')
 	}
 }
 
