@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task 1</title>
+    <style>
+        .ask_form {
+            width: 400px;
+            height: 260px;
+            display: block;
+            margin: 10% auto;
+            background: #fcfcfc;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        .ask_form h2 {
+            font-size: 30px;
+            font-weight: 500;
+            color: #48a7ff;
+            text-align: center;
+        }
+        .ask_form input {
+            display: block;
+            height: 40px;
+            margin: auto;
+            border: none;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
+        }
+        .ask_form input[type='text'] {
+            width: 300px;
+        }
+        .ask_form input[type='button'] {
+            width: 250px;
+            border-radius: 5px;
+            margin-top: 25px;
+            background: #000;
+        }
+    </style>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="Oleg_Vasytinskiy.js"></script>
+</head>
+<body>
+    <div class="ask_form">
+        <h2>You can find out century by exact year:</h2>
+        <input type="text" placeholder="Enter a year" id="year">
+        <input type="button" onclick="CenturyCount()" value="Get info">
+    </div>
+</body>
+</html>
