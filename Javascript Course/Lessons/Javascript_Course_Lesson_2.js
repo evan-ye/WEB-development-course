@@ -81,13 +81,13 @@ cities.splice( 1, 2 );
 cities //  [ 'Moscow', 'London', 'Ottawa' ]
 
 
-arrrrr = [5, '', 'string', 20];
+arrrrr = [5, ,'string', 20];
 for (var i=0; i < arrrrr.length; i++) {
-  //console.log(arrrrr[i]);
+  console.log(arrrrr[i]); // 5, undefined, string, 20
 }
 
 for (var x in arrrrr) {
-  console.log(x);
+  console.log(arrrrr[x]); // 5, string, 20
 }
 
 // reduce
@@ -131,3 +131,19 @@ hey['index'] = 'index value';
 
 // Interactive Tutorial
 // https://regexone.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
