@@ -6,10 +6,8 @@ function getMaxMult(arr) {
 	for (var i = 0; i < arr.length; i++) {
 		newArr.push(previousCurrent * arr[i]);
 		previousCurrent = arr[i];
-	}
-	for (var j = 0; j < newArr.length; j++) {
-		if (newArr[j] > maxInArr) {
-			maxInArr = newArr[j];
+		if (newArr[i] > maxInArr) {
+			maxInArr = newArr[i];
 		}
 	}
 	return maxInArr;
