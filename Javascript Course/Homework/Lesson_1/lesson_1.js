@@ -27,7 +27,7 @@ function getCentury(input){
 
 		answer = 1;
 
-	}else {
+	} else {
 
 	    inputString += input;
 
