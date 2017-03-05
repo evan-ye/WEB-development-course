@@ -1,10 +1,12 @@
 function isPalindrome(string) {
-  if (string == "" || string == undefined) {
+  if (string === "" || string === undefined) {
     return "Data is not detected"
   }
 
-  var backStr = string.toString().split("").reverse().join("");
-  if (string.toString() == backStr) {
+  string = string.toString().toLowerCase();
+  var backStr = string.split("").reverse().join("");
+
+  if (string == backStr) {
     return true;
   } else {
     return false;
