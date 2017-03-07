@@ -12,7 +12,7 @@ function Re(code)
   }
 
   for (var i = 0; i < result.length;i++)  {
-     finalcode + '<li>' + result[i] + '</li>\n';
+     finalcode += '<li>' + result[i] + '</li>\n';
   }
 
   finalcode += '</ul>';
