@@ -13,3 +13,12 @@ function area(n) {
     if (!Number.isInteger(n) || n < 1) return false;
     return Math.pow(n, 2) + Math.pow((n-1), 2);
 }
+
+function getHeaders(str) {
+    var reg =/<h2\b[^>]*>(.*?)(<\/h2|$)(\b[^>]*>)?/igm;
+    var res = '<ul>';
+    while (match = reg.exec(str)) {
+        res += '<li>' + match[1].replace(/<.*<\/.*>/g, "").trim() + '</li>';
+    }
+    return res + '</ul>';
+}
