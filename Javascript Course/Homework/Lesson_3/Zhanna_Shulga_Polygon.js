@@ -6,7 +6,7 @@ function Polygon(n)
 
   var area = 1;
 
-  for (var i = 1; i <= n; i++){
+  for (var i = 1; i < n; i++){
   area = area + 4*i;
   }
 
