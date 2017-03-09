@@ -19,23 +19,28 @@ function Poli(){
   //REgExp
   function Rex(){
   var str = document.getElementById("rex").value;
-     var result = str.match(/<h2[^>]*>(.*?)<\/h2>/gm);
-        document.getElementById("res").innerHTML = result[0];
+    
+    var arr =  str.match(/<h2[^>]*>*(.*?)<\/h2>/gm);  
+    var list = '<ul>';
+	for(i = 0; i < arr.length; i++)
+    {
+		list += '<li>' + arr[i].replace('h2','') + '</li>';
+	}
+        list += '</ul>';
+        //alert(list);
+   document.getElementById("resRex").innerHTML = list;
   }
 
   function PolyGram(){
     var n = document.getElementById("side").value;
-    var square = 0;
-    function factorial(n) {
-            return (n != 1) ? n * factorial(n - 1) : 1;
-            }
-    if(n == 1){
-        square = 1;
-        
-    } else if( n <= 3){
-      square = factorial(n) * 2 + 1;   
-      }else{
-      square =  factorial(n);
-}
+    if(n < 0|| n== NaN){
+        alert("min square is 1")
+    }else 
+    if (n <= 0 || !n) {
+        return 0
+    } else {
+        var square = n * n + (n - 1) * (n - 1);
+       // alert(square);
+      }
         document.getElementById("square").innerHTML = "Square = " + square;
   }
