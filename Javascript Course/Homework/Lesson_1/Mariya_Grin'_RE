@@ -1,0 +1,11 @@
+function getContent(htmlContent) {
+ var a = htmlContent.match(/<h2.*?>*?<\/h2>/ig);
+ var list= '<ul>';
+  for (var i = 0; i <= a.length; i++) {
+
+        list += '<li>' + a[i] + '</li> </br>';
+
+    };
+    list += '</ul>';
+    return list;
+ }
