@@ -1,5 +1,3 @@
-function compare(a, b) { return a-b; }
-
 function missedNumbers(ar){
   var finish = Math.max.apply(null, ar);
   var start = Math.min.apply(null, ar);
