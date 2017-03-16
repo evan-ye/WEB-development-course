@@ -7,15 +7,11 @@ function missingNumbers(arr) {
     }
     var sortArr = arr.sort(compare).reverse()
 
-    sortArr.forEach(function(item, i, arr) {
+    for (var i = 0; i< sortArr.length - 1; i++) {
         result.push((sortArr[i] - sortArr[i + 1]) - 1)
-    })
+    }
 
-    var positiveArr = result.filter(function(number) {
-        return number > 0;
-    })
-
-    result = positiveArr.reduce(function(sum, current) {
+    result = result.reduce(function(sum, current) {
         return sum + current
     })
 
