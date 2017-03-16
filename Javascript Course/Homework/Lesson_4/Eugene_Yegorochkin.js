@@ -1,3 +1,4 @@
+//a little bit shorter version
 function missingNumbers(arr) {
     var result = []
 
