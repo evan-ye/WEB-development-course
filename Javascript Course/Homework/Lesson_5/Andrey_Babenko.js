@@ -11,6 +11,8 @@ function possibleSequence(array) {
       continue;
     }
   mistake++; 
+  array.splice(i+1,1);
+  i--;
   }
   var answer = mistake <= 1 ? true : false;
   return answer;
