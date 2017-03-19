@@ -2,18 +2,22 @@ function possibleSequence(array) {
   if (array.length <= 0) {
     return false;
   }
-  if (array.length == 2 && array[0] > array[1]) {
-    return false;
-  }
   var mistake = 0;
   for (var i=0; i<array.length-1; i++) {
-    if (array[i] < array[i+1]) {
+    if (array[0] > array[1]) {
+      mistake++;
+      array.splice(0,1);
+    } else if (array[i] < array[i+1]) {
       continue;
+    } else if (array[i] > array[i+1] && array[i] > array[i+2]) {
+      mistake++;
+      array.splice(i,1);
+      i--;
+    } else {
+      mistake++;
+      array.splice(i+1,1);
+      i--;
     }
-  mistake++; 
-  array.splice(i+1,1);
-  i--;
   }
-  var answer = mistake <= 1 ? true : false;
-  return answer;
+  return mistake <= 1;
 }
