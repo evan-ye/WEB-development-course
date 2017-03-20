@@ -1,7 +1,7 @@
 function isSequence(ar){ 
-if (ar.length <= 2) { 
-  return 'Введите массив, содержащий более двух элементов.';
-} 
+if (ar.length == 0) { 
+  return 'Введите массив.';
+}  
 var i = 0; 
 while (i < ar.length - 1) { 
   if (!i) {
