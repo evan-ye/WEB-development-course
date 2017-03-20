@@ -1,5 +1,5 @@
 function isSequence(ar){ 
-if (ar.length == 0) { 
+if (ar === undefined || ar.length == 0) {
   return 'Введите массив.';
 }  
 var i = 0; 
