@@ -2,16 +2,17 @@ function getAscSequence (arr) {
 	if (arr.length <= 2) {
 		return true;
 	}
-	var amountFalse = 0;
+	var amountFalse = 0,
+		removed;
 	for (var i = 0; i < arr.length; i++) {
 		if (i == 0) {
-			var removed = arr.splice(i, i+1);
+			removed = arr.splice(i, i+1);
 		}
 		else if (i == 1) {
-			var removed = arr.splice(i, i);
+			removed = arr.splice(i, i);
 		}
 		else {
-			var removed = arr.splice(i, ((i+1)-i));
+			removed = arr.splice(i, ((i+1)-i));
 		}
 		var amountTrue = 0;
 		for (var j = 0; j < arr.length-1; j++) {
