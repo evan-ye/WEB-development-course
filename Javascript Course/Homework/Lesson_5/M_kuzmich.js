@@ -2,6 +2,11 @@ function checkArray(arr){
 	if(typeof arr != 'object' || arr.length < 2){
 		return 'Функция принимает лишь массивы содержащие больше чем 1 элементов';
 	}
+	for(i=0; i < arr.length; i++){
+		if (Number.isInteger(arr[i]) != true)
+			return 'Массив должен состоять лишь из целых чисел'
+
+	}
 	for (i=0; i < arr.length - 1; i++) {
 		if (arr[i + 1] < arr[i] &&  arr[i + 2] < arr[i]) {
 			arr.splice(i, 1); 
