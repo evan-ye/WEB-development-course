@@ -1,6 +1,6 @@
 function getAscSequence (arr) {
 	if (arr.length <= 2) {
-		return false;
+		return true;
 	}
 	var amountFalse = 0;
 	for (var i = 0; i < arr.length; i++) {
