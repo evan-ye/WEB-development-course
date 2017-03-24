@@ -23,6 +23,12 @@ function priceSumm(input){
 	if(input.length > options.floorMax ) return messages.LongMatrix;
 	if(input[0].length > options.aprtmentMax ) return messages.LongFloor;
 
+	input[0].forEach(function(elem){
+		if(elem > 10 ){
+			error = messages.highPrice;
+		}
+	})
+
 	var summ = input[0].reduce(function(a,b){return a+b;}), floorLength = 0;
 
 	if(input.length == 1) return summ;
@@ -42,7 +48,7 @@ function priceSumm(input){
 	  	return currentValue;
 	});
 
-	if(errors.length){
+	if(error.length){
 		return error;
 	}
 
@@ -56,4 +62,4 @@ console.log(priceSumm("Fake input"));
 console.log(priceSumm([])); 
 console.log(priceSumm([[0, 1, 1, 2]])); 
 console.log(priceSumm([[0, 1, 1, 2],[0, 1, 1, 2],[0, 1, 1, 2],[0, 1, 1, 2],[0, 1, 1, 2],[0, 1, 1, 2]])); // count of floors is 6
-console.log(priceSumm([[0, 1, 1, 2],[0, 1, 1, 11],[0, 1, 1, 2],[0, 1, 1, 2],[0, 1, 1, 2]]));  // price more then 10
+console.log(priceSumm([[11, 1, 1, 2],[0, 1, 1, 1],[0, 1, 1, 2],[0, 1, 1, 2],[0, 1, 1, 2]]));  // price more then 10
