@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>My Web Page</title>
+    <style>
+    	h2 { border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+		#banner { border-style:solid !important; border-width: 1px; border-color: #000; min-height: 100px; text-align: center; margin-bottom: 50px; }
+		.banner-text,
+		.banner-slogan { border: 1px solid #000; margin: 20px auto; width: 50%; position: relative; }
+		a {font-weight: bold; color: blue;}
+		ul li { color: #000; }
+		.red { color: red; }
+		.hide { display: none; }
+		form label { clear: left; display: block; float: left; width: 110px; margin-right: 20px; }
+		form label.error { width: auto; color: red; clear: none; margin-left: 10px; }
+		input { float: left; margin-bottom: 10px }
+		form div { clear: both; }
+		.label { clear: both; font-weight: bold; }
+		#gallery { clear: both; }
+		div#banner {
+			width : 90%;
+			height : 300px;
+			padding : 20px;
+			border : 5px solid black;
+			margin: 20px auto;
+		}
+		#map {
+			width: 760px;
+			height: 400px;
+			margin: 0 auto;
+			border: 2px solid blue;
+		}
+		#removeMarkers {
+			float: left;
+			padding: 5px;
+			width: auto;
+			height: 20px;
+			border: 2px solid blue;
+		}
+    </style>
+    <link rel="stylesheet" type="text/css" media="all" href="assets/fancybox/jquery.fancybox.min.css">
+	<link rel="stylesheet" type="text/css" media="all" href="assets/jquery-ui/jquery-ui.min.css">
+    <script src="assets/jquery-3.1.1.min.js"></script>
+    <script src="assets/fancybox/jquery.fancybox.min.js"></script>
+	<script src="assets/jquery.easing.1.3.js"></script>
+	<script src="assets/jquery-ui/jquery-ui.min.js"></script>
+	<script src="assets/jquery-validation-1.16.0/dist/jquery.validate.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyC4rX0E3rDFCN38HXusDULHKhum1WohZps"></script>
+	<script src="assets/jquery.gomap-1.3.3.min.js"></script>
+    <script src="jQuery_lesson_8.js"></script>
+</head>
+
+<body>
+
+<h1>Sample page</h1>
+
+
+<div id="banner">
+	<div class="banner-text">Banner</div>
+	<div class="banner-slogan">Slogan</div>
+</div>
+
+<h2 id="paragraphs">Paragraphs</h2>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quasi odio sit cupiditate molestias, odit est deserunt, laudantium iusto veritatis voluptatum totam, assumenda suscipit fuga id aut perferendis maiores tempore enim perspiciatis qui provident temporibus. <a href="http://jquery.com/">http://jquery.com/</a> Voluptatum ducimus accusantium deserunt voluptates explicabo soluta, earum sunt, alias blanditiis, minus tempora maiores laudantium.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quasi odio sit cupiditate molestias, odit est deserunt, laudantium iusto veritatis voluptatum totam, assumenda suscipit fuga id aut perferendis maiores tempore enim perspiciatis qui provident temporibus. Voluptatum ducimus accusantium deserunt voluptates explicabo soluta, earum sunt, alias blanditiis, minus tempora maiores laudantium.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quasi odio sit cupiditate molestias, odit est deserunt, laudantium iusto veritatis voluptatum totam, assumenda suscipit fuga id aut perferendis maiores tempore enim perspiciatis qui provident temporibus. <a href="http://jqueryui.com/">http://jqueryui.com/</a> Voluptatum ducimus accusantium deserunt voluptates explicabo soluta, earum sunt, alias blanditiis, minus tempora maiores laudantium.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam quasi odio sit cupiditate molestias, odit est deserunt, laudantium iusto veritatis voluptatum totam, assumenda suscipit fuga id aut perferendis maiores tempore enim perspiciatis qui provident temporibus. Voluptatum ducimus accusantium deserunt voluptates explicabo soluta, earum sunt, alias blanditiis, minus tempora maiores laudantium.</p>
+
+<h2 id="table">Table</h2>
+<table class="sample-table" border="1" cellspacing="0" cellpadding="8" width="100%">
+	<tbody>
+		<tr>
+			<td>Lorem ipsum.</td>
+			<td>Lorem ipsum.</td>
+			<td>Lorem ipsum.</td>
+			<td>Lorem ipsum.</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor sit amet.</td>
+			<td>Lorem ipsum dolor sit amet.</td>
+			<td>Lorem ipsum dolor sit amet.</td>
+			<td>Lorem ipsum dolor sit amet.</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum dolor sit amet.</td>
+			<td>Lorem ipsum dolor sit amet.</td>
+			<td>Lorem ipsum dolor sit amet.</td>
+			<td>Lorem ipsum dolor sit amet.</td>
+		</tr>
+		<tr>
+			<td>Lorem ipsum.</td>
+			<td>Lorem ipsum.</td>
+			<td>Lorem ipsum.</td>
+			<td>Lorem ipsum.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2 id="list">List</h2>
+<ul class="top-list">
+	<li>level 1</li>
+	<li>level 1</li>
+	<li>level 1</li>
+	<li>level 1
+		<ul class="nested-list">
+			<li>level 2</li>
+			<li>level 2</li>
+			<li>level 2</li>
+		</ul>
+	</li>
+</ul>
+
+
+
+<div id="map"></div>
+<div id="removeMarkers">removeMarkers</div>
+</body>
+
+</html>
