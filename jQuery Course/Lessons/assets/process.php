@@ -3,7 +3,8 @@
 // Text Response
 $textResponse = "Submission is successful";
 
-// XML Responce
+
+// XML Response
 $xmlResponse = '
 <?xml version="1.0" ?>
 <message id="234">
@@ -13,9 +14,10 @@ $xmlResponse = '
  <content>Janette, let\'s grab lunch today.</content>
 </message>';
 
-// JSON responce
+
+// JSON response
 $arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
 $jsonResponse = json_encode($arr);
 
 
-echo  $textResponse;
+echo  $jsonResponse;
