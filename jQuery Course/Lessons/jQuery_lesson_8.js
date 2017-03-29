@@ -8,16 +8,16 @@ jQuery(document).ready(function ($) {
 
     // Constructing the URL
 
-/*  var URL = "http://api.flickr.com/services/feeds/photos_public.gne";
+  var URL = "http://api.flickr.com/services/feeds/photos_public.gne";
     var ID = "25053835@N03";
     var jsonFormat = "&format=json&jsoncallback=?";
-    var ajaxURL = URL + "?id=" + ID + jsonFormat; */
+    var ajaxURL = URL + "?id=" + ID + jsonFormat;
 
 
 
     // Using the $.getJSON() Function
 
-/*  $.getJSON(ajaxURL,function(data) {
+  $.getJSON(ajaxURL,function(data) {
         console.log(data);
         $('#banner').text(data.title).wrapInner('<h1>');
         $.each(data.items,function(i,photo) {
@@ -27,7 +27,7 @@ jQuery(document).ready(function ($) {
             photoHTML += '</a></span>';
             $('#banner').append(photoHTML);
         });
-    }); */
+    });
 
 
 
@@ -62,7 +62,7 @@ jQuery(document).ready(function ($) {
 
     // Adding Google Maps to Your Site with goMap
 
-/*    $('#map').goMap({
+    $('#map').goMap({
         // Setting a Location for the Map
 //      latitude : 48.464717,
 //      longitude : 35.046183,
@@ -124,7 +124,7 @@ jQuery(document).ready(function ($) {
     $('#removeMarkers').click(function() {
         $.goMap.clearMarkers();
     }); // end click
-*/
+
 
 
 
@@ -135,7 +135,7 @@ jQuery(document).ready(function ($) {
 
 
     // Useful jQuery Tips and Information
-    
+
 
     // $() Is the Same as jQuery()
     // jQuery('p').css('color','#F03'); = $('p').css('color','#F03');
