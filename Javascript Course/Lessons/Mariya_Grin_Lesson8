@@ -1,0 +1,18 @@
+function getCommonSymbols(string1, string2) {
+    var string1 = "aabcc".split('')
+    var string2 = "adcaa".split('')
+    var all_str = [];
+    var all_ok = false;
+    for (var str1 in string1) {
+
+        for (var str2 in string2) {
+            if (string1[str1] == string2[str2]) {
+                delete string2[str2];
+                all_str.push(string1[str1]);
+                all_ok = true;
+                break;
+            }
+        }
+    }
+    return all_str.length;
+};
