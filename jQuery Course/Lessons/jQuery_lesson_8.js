@@ -14,7 +14,6 @@ jQuery(document).ready(function ($) {
     var ajaxURL = URL + "?id=" + ID + jsonFormat;
 
 
-
     // Using the $.getJSON() Function
 
   $.getJSON(ajaxURL,function(data) {
@@ -195,8 +194,121 @@ jQuery(document).ready(function ($) {
     // 2) Use IDs first, as part of a descendent selector:
     // $('#banner .banner-text');
 
-    // Use the .find() function:
+    // 3) Use the .find() function:
     // $('#banner').find('.banner-text');
+
+
+    // Using the jQuery Docs
+
+    // jQuery Core         (http://api.jquery.com/category/core/)
+    // Selectors           (http://api.jquery.com/category/selectors/)
+    // Attributes          (http://api.jquery.com/category/attributes/)
+    // Traversing          (http://api.jquery.com/category/traversing/)
+    // Manipulation        (http://api.jquery.com/category/manipulation/)
+    // The CSS page        (http://api.jquery.com/category/css/)
+    // Events              (http://api.jquery.com/category/events/)
+    // The Effects page    (http://api.jquery.com/category/effects/)
+    // The Ajax category   (http://api.jquery.com/category/ajax/)
+    // Utilities           (http://api.jquery.com/category/utilities/)
+    // The Data category   (http://api.jquery.com/category/data/)
+    // Dimensions          (http://api.jquery.com/category/dimensions/)
+    // The Offset category (http://api.jquery.com/category/offset/)
+    // The Forms category  (http://api.jquery.com/category/forms/)
+    // Internals           (http://api.jquery.com/category/internals/)
+    // Deferred Object     (http://api.jquery.com/category/deferred-object/)
+
+
+
+    // Traversing the DOM
+
+    // .find()
+    // .parent()
+    // $('#banner').parent(); // body
+    // $('.nested-list').closest('.top-list');
+    // .parents('.class')
+    // .siblings()
+    // .next()
+    // .prev()
+
+
+    // Putting an .end() to DOM Traversal
+
+    $('.top-list li').click(function() {
+        $(this).find('.nested-list li').addClass('red').end().addClass('red');
+    });
+
+
+    // More Functions For Manipulating HTML
+    // .text()
+    // .html()
+    // .append()
+    // .prepend()
+    // .before()
+    // .after()
+    // .replaceWith()
+    // .remove()
+
+    // .wrap()
+    $('p').wrap('<div class="outer"><div class="inner"></div></div>');
+
+    //.wrapInner();
+    $('p').wrapInner('<div class="inner"></div>');
+
+    // .unwrap()
+    $('p').unwrap().unwrap();
+
+
+
+    // Advanced Event Handling
+    // Doesn`t work
+    /* $('#banner a').click(function (e) {
+        alert($(this).find('img').attr('src'));
+        e.preventDefault();
+    }); */
+
+
+    // Deprecated
+    /* $('#banner').delegate('a', 'click', function (e) {
+            alert($(this).find('img').attr('src'));
+            e.preventDefault();
+    }) */
+
+    // Recommended
+    $('#banner').on('click', 'a', function (e) {
+        alert($(this).attr('src'))
+        e.preventDefault();
+    });
+
+
+
+    // Troubleshooting and Debugging
+
+    // Syntax Errors
+    // Runtime errors
+    // Logic errors
+
+    /* if(URL = 'http://google.com') {
+            console.log(URL);
+    } */
+
+    /* for (var i=1; i>0; i++) {
+        // this will run forever
+    } */
+
+
+
+
+    // Programming Tips to Reduce Errors
+
+    // Build a script in small chunks
+    // Test frequently
+
+
+
+    // Debugging
+
+    // console.log()
+    // source debugger, step by step
 
 
 }); // document ready end
