@@ -12,12 +12,13 @@ function bingo(ticket) {
         var secondPartOfTicket = ticketArray.slice(ticketArray.length / 2, ticketArray.length)
     }
 
-    firstPartOfTicket.reduce(function(sum, current) {
-        firstPartOfTicket = sum + current
+    var SumOfFirstPartOfTicket = firstPartOfTicket.reduce(function(sum, current) {
+        return sum + current
     });
-    secondPartOfTicket.reduce(function(sum, current) {
-        secondPartOfTicket = sum + current
+    var SumOfSecondPartOfTicket =secondPartOfTicket.reduce(function(sum, current) {
+        return sum + current
     });
-    return firstPartOfTicket == secondPartOfTicket
+
+    return SumOfFirstPartOfTicket == SumOfSecondPartOfTicket
 }
-bingo(1230)
+bingo(134008)
