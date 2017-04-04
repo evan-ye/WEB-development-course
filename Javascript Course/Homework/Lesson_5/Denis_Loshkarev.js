@@ -1,39 +1,43 @@
 function isSortedArray(array) {
-    if (!Array.isArray(array)) return false;
-
-    var delIndex = -1;
-
-    if (array[0] > array[1]) delIndex = 0;
-
-    for(var i = 1; i < array.length; i++) {
-
-        var prev = array[i-1];
-        if (delIndex == 0 && i == 1) {
-            prev = Number.MIN_SAFE_INTEGER;
-        } else if (i-1 == delIndex) {
-            prev = array[i-2];
-        }
-
-        if (array[i] < prev) {
-            if (delIndex == -1) {
-                delIndex = i;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    return true;
+    
 }
 
-var array = [3, 2, 1, 4];
-console.log(array, isSortedArray(array));
+var array = [3, 2, 3, 4];
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
+
+array = [1, 4, 5, 3];
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
 
 array = [3, 2, 2, 4];
-console.log(array, isSortedArray(array));
-
-array = [3, 2, 1, 4];
-console.log(array, isSortedArray(array));
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
 
 array = [1, 2, 1, 2];
-console.log(array, isSortedArray(array));
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
+
+array = [1, 4, 2, 3];
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
+
+array = [1, 4, 2, 8];
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
+
+array = [1, Number.MAX_SAFE_INTEGER, 2, 8];
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
+
+array = [1, Number.MAX_SAFE_INTEGER, 2, Number.MAX_SAFE_INTEGER, 8];
+console.log(array);
+console.log(isSortedArray(array));
+console.log();
