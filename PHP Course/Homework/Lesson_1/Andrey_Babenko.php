@@ -2,9 +2,7 @@
 function sortPeople($queue) {
     $allPeople = [];
     foreach ($queue as $value) {
-        if ($value < 0) {
-            continue;
-        } else {
+        if ($value > 0) {
             $allPeople[] = $value;
         }
     }
@@ -12,9 +10,7 @@ function sortPeople($queue) {
     sort($allPeople);
     $human = 0;
     foreach ($queue as &$value) {
-        if ($value < 0) {
-            continue;
-        } else {
+        if ($value > 0) {
             $value = $allPeople[$human];
             $human++;
         }
