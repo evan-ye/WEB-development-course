@@ -1,9 +1,18 @@
-function getReverseString($string) { 
-preg_match_all('/\(([^\)]*)\)/', $string, $matches);
+function getReverseString($string) {
 
-for ($x = 0; $x < count($matches); $x++) {
-  $string =  str_replace($matches[0][$x], strrev($matches[1][$x]), $string);
-} 
- print_r($string);
+    while (strlen(stristr($string, "("))) {
+        if (strrpos($string, "(") < strpos($string, ")")) {
+            $start = strrpos($string, "(");
+            $end = stripos($string, ")");
+        } else {
+            $start = strpos($string, "(");
+            $end = strpos($string, ")");
+        }
+        $len = strlen($string) - 1;
+        $substring = substr($string, $start, -($len - $end));
+        $clearSubstring = substr($substring, 1, strlen($substring) - 2);
+        $string = str_replace($substring, strrev($clearSubstring), $string);
+    }
+    print_r($string);
 }
-getReverseString("a(bc)de");
+getReverseString("a(bcdefghijkl(mno)p)q");
