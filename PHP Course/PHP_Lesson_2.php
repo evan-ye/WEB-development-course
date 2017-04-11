@@ -328,7 +328,7 @@ z // Порядковый номер дня в году (нумерация с 0
 
 function showConst(){
     echo "<br>","Line: ",__LINE__, "<br>";
-    echo "File: ",__FILE__,"<br>";
+    //echo "File: ",__FILE__,"<br>";
     echo "Function: ",__FUNCTION__;
 }
 showConst();
@@ -341,4 +341,38 @@ showConst();
 // phpinfo(); - Выводит информацию о текущей конфигурации PHP
 
 
+// Предопределенные переменные: _SERVER
+// $_SERVER //Массив, содержащий информацию о сервере и его среде
+// DOCUMENT_ROOT
+// GATEWAY_INTERFACE
+// HTTP_ACCEPT
+// HTTP_ACCEPT_CHARSET
+// HTTP_ACCEPT_ENCODING
+// HTTP_ACCEPT_LANGUAGE
+// HTTP_CONNECTION
+// HTTP_HOST
+// HTTP_REFERER
+// HTTP_USER_AGENT
+// PATH_TRANSLATED
+// PHP_AUTH_PW
+// PHP_AUTH_TYPE
+// PHP_AUTH_USER
+// PHP_SELF
+// QUERY_STRING
+// REMOTE_ADDR
+// REMOTE_PORT
+// REQUEST_METHOD
+// REQUEST_URI
+// SCRIPT_FILENAME
+// SCRIPT_NAME
+// SERVER_ADMIN
+// SERVER_NAME
+// SERVER_PORT
+// SERVER_PROTOCOL
+// SERVER_SIGNATURE
+// SERVER_SOFTWARE
 
+
+/*echo "<pre>";
+print_r();
+echo "</pre>";*/
