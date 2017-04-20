@@ -119,9 +119,91 @@ echo "</pre>";
 
 /*
 $array = array("I", "love", "you");
-file_put_contents("test.txt",$array)
-*/;
+file_put_contents("test.txt",$array);
+*/
 
 
+
+// Файлы: управление
+
+// Копирование файла
+// copy('test.txt', 'new_test.txt');
+
+// Переименование файла
+// rename('new_test.txt', 'super_new_test.txt');
+
+// Удаление файла
+// unlink('super_new_test.txt');
+
+
+
+
+// Директории: работа и манипуляции
+
+// Создание директории
+// mkdir('new_dir_777', 0777);
+
+// Удаление директории
+// rmdir('new_dir_777');
+
+// Открываем директорию
+// $dir = opendir('assets');
+
+// Читаем директорию
+// $name = readdir($dir);
+/*print_r(readdir($dir));
+echo "<br>";
+print_r(readdir($dir));
+echo "<br>";
+print_r(readdir($dir));
+echo "<br>";
+print_r(readdir($dir));
+echo "<br>";
+print_r(readdir($dir));
+echo "<br>";
+print_r(readdir($dir));*/
+
+
+// Закрываем директорию
+// closedir($dir)
+
+// Check file
+// echo is_file('test.txt'); // 1
+// echo is_file('assets'); // 0
+
+// Check directory
+// echo is_dir('assets'); // 1
+
+
+// Сканируем директорию
+/*
+ echo "<pre>";
+print_r(scandir('assets'));
+echo "</pre>";
+*/
+
+/*
+echo "<pre>";
+print_r(scandir('.')); // Возвращает список файлов по алфавиту
+print_r(scandir('.', 1)); // Возвращает список файлов по алфавиту в обратном порядке
+echo "</pre>";
+*/
+
+
+// Файлы: загрузка на сервер
+
+print_r($_FILES);
+
+if($_FILES['userfile']['error'] == 0) {
+    $tmp = $_FILES['userfile']['tmp_name'];
+    $name = $_FILES['userfile']['name'];
+    move_uploaded_file($tmp, __DIR__ . '/upload/' . $name);
+}
 
 ?>
+
+<form enctype="multipart/form-data" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="51200">
+    <input type="file" name="userfile">
+    <input type="submit" value="Send">
+</form>
