@@ -1,10 +1,11 @@
 jQuery(document).ready(function($) {
+
     // Field on focus
     $('.field').on('focus', function() {
         $(this).siblings('label').animate({
             fontSize: 15,
             top: -25,
-        }, 'fast').css("color","#0006f5");
+        }, 'fast');
         $(this).siblings('.separator').animate({
             width: '100%',
         }, 'fast');
@@ -16,12 +17,29 @@ jQuery(document).ready(function($) {
             $(this).siblings('label').animate({
                 fontSize: 20,
                 top: 0,
-            }, 'fast').css("color","ffffff");
+            }, 'fast');
         }
         $(this).siblings('.separator').animate({
             width: 0
         }, 'fast');
     });
+
+    // Error-icon hover
+    $('.submit-icon').hover(
+        function(){
+            if ($(this).hasClass('error-icon')) {
+                $(this).siblings('.error-text').fadeIn('fast');
+            }
+        },
+        function(){$(this).siblings('.error-text').fadeOut('fast');}
+    );
+
+    // Ticket type checkboxes
+    $( function() {
+        $(':radio').checkboxradio({
+            icon: false
+        });
+    } );
 
     // Form validation
     $.validator.addMethod(
@@ -34,47 +52,77 @@ jQuery(document).ready(function($) {
     );
 
     $('form').validate({
-        messages: {firstname: " ", lastname: " ", email: " ", ticketType: " "},
+        messages: {
+            firstname: "Can consist only of Latin letters and dashes",
+            lastname: "Can consist only of Latin letters and dashes",
+            email: "Incorrect e-mail adress",
+            ticketType: "Please, choose ticket type"},
         rules: {
             firstname: {
-                regex: "^[A-z\-]+$"
+                required: true,
+                regex: "^[A-z-]+$"
             },
             lastname: {
-                regex: "^[A-z\-]+$"
+                required: true,
+                regex: "^[A-z-]+$"
             },
             email: {
+                required: true,
                 regex: "^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$"
+            },
+            ticketType: {
+                required: true
             }
         },
-        invalidHandler: function(event, validator) {
-            if (validator.errorMap.firstname) {
-                $('.response-text').html("Please enter your first name");
-            } else if (validator.errorMap.lastname) {
-                $('.response-text').html("Please enter your last name");
-            } else if (validator.errorMap.email) {
-                $('.response-text').html("Please enter your e-mail correctly");
-            } else if (validator.errorMap.ticketType) {
-                $('.response-text').html("Please choose type of ticket");
+        errorPlacement: function(error, element) {
+            element.siblings('.error-text').html(error[0].innerText);
+            if (element.hasClass('error')) {
+                element.siblings('.submit-icon').removeClass('success-icon').addClass('error-icon');
+            } else {
+                element.siblings('.submit-icon').removeClass('error-icon').addClass('success-icon');
             }
+        },
+        success: function (element) {
+            element.siblings('.submit-icon').removeClass('error-icon').addClass('success-icon');
+        },
+        submitHandler: function(form) {
+                var $submitButton = $(this).find(':submit');
+                $submitButton.prop('disabled', true);
+                $submitButton.val('Sending...');
+                var data = $(form).serialize();
+                $.ajax({
+                    url: 'registration_form.php',
+                    data: data,
+                    success: function(response) {
+                        response = jQuery.parseJSON(response);
+                        if (response.errors) {
+                            showErrors(response);
+                        } else {
+                            showResponsText(response);
+                        }
+                    },
+                    method: 'post'
+                });
         }
     });
 
-    // On submit
-    $('form').on('submit', function(event) {
-        event.preventDefault();
-        $('.field.error').parent().css({borderColor: '#ff5454',});
-        $('.field.valid').parent().css({borderColor: '#ffffff',});
-        if ($('form').valid()) {
-            $('.response-text').html("");
-            var data = $(this).serialize();
-            $.ajax({
-             url: 'registration_form.php',
-             data: data,
-             success: function(response) {
-                 $('.response-text').html(response);
-             },
-             method: 'post'
-            });
+    // Show errors after response
+    function showErrors(response) {
+        for (key in response) {
+            if (response[key] == 0) {
+                $("input[name="+key+"]").siblings('.submit-icon').removeClass('success-icon').addClass('error-icon');
+            }
         }
-    })
+    }
+
+    // Show response text
+    function showResponsText(response) {
+        $('.radio-group>.error-text').html(response.responseText);
+        if (response.email) {
+            $('.radio-group>.error-text').css('background', 'linear-gradient(140deg, #84bd00, #00bdea, #a265e2)');
+        } else {
+            $('.radio-group>.error-text').css('background', 'linear-gradient(140deg, #e52810, #e56520, #dd6c02)');
+        }
+        $('.radio-group>.error-text').fadeIn('fast').delay(3000).fadeOut('fast');
+    }
 });

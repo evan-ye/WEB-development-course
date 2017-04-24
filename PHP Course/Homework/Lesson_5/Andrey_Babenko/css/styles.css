@@ -1,0 +1,240 @@
+/*   Background animation   */
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.background-gradient {
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+form {
+  width: 500px;
+  height: 525px;
+  margin: 75px auto;
+  padding: 25px 25px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+@media (max-width: 788px) {
+  form {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 150px 25px;
+    border-radius: 0;
+  }
+}
+form h1 {
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+form .field-block {
+  width: 95%;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #ffffff;
+  position: relative;
+}
+form .field-block label {
+  position: absolute;
+}
+form .field-block .field {
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 2px;
+}
+form .field-block .submit-icon {
+  width: 20px;
+  height: 20px;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+form .field-block .success-icon {
+  -webkit-mask-image: url('../images/valid.svg');
+  mask-image: url('../images/valid.svg');
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+form .field-block .error-icon {
+  -webkit-mask-image: url('../images/error.svg');
+  mask-image: url('../images/error.svg');
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  background: linear-gradient(140deg, #e52810, #e56520, #dd6c02);
+  cursor: pointer;
+}
+form .field-block .error-text {
+  padding: 5px;
+  font-size: 10px;
+  border-radius: 5px;
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  background: linear-gradient(140deg, #e52810, #e56520, #dd6c02);
+  position: absolute;
+  top: -25px;
+  right: 15px;
+  display: none;
+}
+form .field-block .separator {
+  height: 2px;
+  width: 0;
+  margin-top: 5px;
+  position: relative;
+  top: 1px;
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+form .radio-group {
+  width: 95%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+form .radio-group label {
+  width: 21%;
+  border: 1px solid #ffffff;
+  background: none;
+  color: #ffffff;
+  transition: 0.3s ease-in-out;
+}
+form .radio-group label:hover {
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  color: #ffffff;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+form .radio-group label.ui-state-active {
+  border: none;
+  box-shadow: none;
+  color: #ffffff;
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+form .radio-group label.ui-state-active:hover {
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  color: #ffffff;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+form .radio-group p.error-text {
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 5px;
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  background: linear-gradient(140deg, #e52810, #e56520, #dd6c02);
+}
+form input[type="radio"] {
+  opacity: 0;
+}
+button[type="submit"] {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  border-radius: 20px;
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px;
+  transition: 0.3s ease-in-out;
+}
+button[type="submit"]:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in-out;
+}
