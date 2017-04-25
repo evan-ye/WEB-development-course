@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>Registration form</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/style.css">
@@ -12,10 +13,14 @@
 			color: red;
 			width: auto;
 		}
+		.response {
+			color:red;
+
+		}
 	</style>
 </head>
 <body>
-	<form id="registrationForm" method="POST" action="registrationForm.php">
+	<form id="registrationForm" action="registrationForm.php" method="POST">
 		<label>First name</label>
 			<input type="text" id="firstName" name="firstName">
 		<label>Last name</label>
@@ -29,6 +34,7 @@
 				<option>Premium</option>
 			</select>
 		<button type="submit" id="send">Send</button>
+		<p class="response"></p>
 	</form>
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.validate.js"></script>
