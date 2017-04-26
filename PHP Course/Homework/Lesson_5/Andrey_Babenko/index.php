@@ -9,7 +9,7 @@
         <h1>Get a ticket</h1>
         <div class="field-block">
             <label for="firstname">First name</label>
-            <input type="text" name="firstname" id="firstname" class="field" maxlength="50" required>
+            <input type="text" name="firstname" id="firstname" class="field" maxlength="50">
             <div class="submit-icon"></div>
             <div class="error-text"></div>
             <div class="separator"></div>
