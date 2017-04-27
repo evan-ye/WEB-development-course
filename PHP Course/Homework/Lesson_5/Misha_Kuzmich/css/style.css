@@ -1,0 +1,106 @@
+.form__input,
+.submit_button{
+	display: block;
+	width: 100%;
+}
+*{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+body{
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.c{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: center;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	-ms-align-items: center;
+	align-items: center;
+	height: 100%;
+}
+form{
+	position: relative;
+	padding: 25px;
+	border-radius: 3px;
+	width: 400px;
+	border: 1px solid black;
+}
+.submit_button{
+	border: none;
+	margin-top: 20px;
+	height: 45px;
+}
+.form__input{
+	height: 30px;
+	padding-left: 10px;
+}
+.infobox{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	margin-top: 30px;
+}
+.error{
+	background: rgba(255,0,0,.4);
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 7px;
+}
+.msg{
+	background: rgba(0,255,0,.4);
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 7px;
+}
+.email_status{
+	display: none;
+	position: absolute;
+	right: 5px;
+	margin-top: -25px;
+}
+.email_status .exist{
+	background: url("http://www.clipartkid.com/images/536/red-x-mark-3-icon-free-red-x-mark-icons-mqvnMT-clipart.jpeg");
+	height: 16px;
+	width: 16px;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center;
+}
+.email_status .new{
+	background: url("https://img.clipartfest.com/524c5a4d699f21f3d0ec1ec209c058d3_dark-green-check-mark-clip-art-green-check-mark-clipart_600-461.png");
+	height: 16px;
+	width: 16px;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center;
+}
+.submit_button{
+	cursor: pointer;
+	background: black;
+	color: white;
+}
+.submit_button:active{
+	position: relative;
+	top: 2px;
+}
+.submit_button:hover{
+	background: rgba(0,0,0,.9);
+}
