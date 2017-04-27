@@ -1,4 +1,5 @@
 <?php
+//Getting data
 if (isset($HTTP_RAW_POST_DATA)) {
     $body = $HTTP_RAW_POST_DATA;
 }
@@ -8,45 +9,64 @@ else {
 $data = array();
 parse_str($body, $data);
 
-$response = [
-    'errors' => -1,
-    'firstname' => preg_match('/^[A-z-]+$/', $data['firstname']),
-    'lastname' => preg_match('/^[A-z-]+$/', $data['lastname']),
-    'email' => preg_match('/^([A-z0-9_\.-]+)@([A-z0-9_\.-]+)\.([A-z\.]{2,6})$/', $data['email']),
-    'ticketType' => $data['ticketType'] === 'free' or $data['ticketType'] === 'standard' or $data['ticketType'] === 'premium'
-];
+$firtsname = $data['firstname'];
+$lastname = $data['lastname'];
+$email = $data['email'];
+$ticketType = $data['ticketType'];
 
-foreach ($response as $key => $value) {
-    if ($value != 1) $response['errors']++;
-}
+// From validation
+require_once ('classes/FormValidator.php');
+$validator = new FormValidator();
+$response = $validator->validateAll($firtsname, $lastname, $email , $ticketType);
 
-
+// Main logic
 if ($response['errors']) {
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 } else {
-    $allUsersFiles = scandir('users');
-    foreach ($allUsersFiles as $file) {
-        if ($file[0] == ".") continue;
-        $fileContent = file("users/".$file, FILE_SKIP_EMPTY_LINES);
-        foreach ($fileContent as $userDataString) {
-            $userData = explode(",", $userDataString);
-            if ($userData[2] == $data['email']) {
-                $response['email'] = false;
-                $response['responseText'] = 'User with such e-mail is already registered';
-                break 2;
-            }
-        }
-    }
-
+    // Connect to host
+    $conn = new mysqli('localhost', 'root', 'root');
+    // Create database if not exists
+    $conn->query("CREATE DATABASE IF NOT EXISTS andreyBabenkoDB");
+    $conn->close();
+    // Connect to DB
+    $conn = new mysqli('localhost', 'root', 'root', 'andreyBabenkoDB');
+    // Create table if not exists
+    $createTableQuery = "CREATE TABLE IF NOT EXISTS users(
+                          id int(4) NOT NULL auto_increment,
+                          firstname varchar(50) NOT NULL default '',
+                          lastname varchar(50) NOT NULL default '',
+                          email varchar(50) NOT NULL default '',
+                          ticketType varchar(10) NOT NULL default '',
+                          regdate timestamp NOT NULL default CURRENT_TIMESTAMP,
+                          PRIMARY KEY (id)
+                          )
+     ";
+    $conn->query($createTableQuery);
+    // Select today's user emails
+    $selectTodayEmail = "SELECT email FROM users
+                          WHERE DATE(regdate) = CURDATE() 
+     ";
+    $result = $conn->query($selectTodayEmail);
+    // Email test for uniqueness
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['email'] == $email) {
+            $response['email'] = false;
+            $response['responseText'] = 'User with such e-mail is already registered';
+            echo $response['email'];
+            break;
+        };
+    };
+    // Add new user
     if ($response['email']) {
-        $todayUsersFile = fopen("users/registration_".date('d_m_Y').".txt", 'a+') or die("File opening error");
-        fwrite($todayUsersFile, $data['firstname'].",".$data['lastname'].",".$data['email'].",".$data['ticketType']."\n");
-        fclose($todayUsersFile);
+        $addNewUserQuery = "INSERT INTO users (firstname, lastname, email, ticketType)
+                              VALUES ('$firtsname', '$lastname', '$email', '$ticketType')
+         ";
+        if ($conn->query($addNewUserQuery));
         $response['responseText'] = "New user created successfully";
     }
+    $conn->close();
 
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 }
-?>

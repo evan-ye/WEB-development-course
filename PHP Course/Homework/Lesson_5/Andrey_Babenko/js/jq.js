@@ -1,27 +1,40 @@
 jQuery(document).ready(function($) {
 
     // Field on focus
+    var focusAnimationPermission = true;
     $('.field').on('focus', function() {
-        $(this).siblings('label').animate({
-            fontSize: 15,
-            top: -25,
-        }, 'fast');
-        $(this).siblings('.separator').animate({
-            width: '100%',
-        }, 'fast');
+        if (focusAnimationPermission) {
+            focusAnimationPermission = false;
+            $(this).siblings('label').animate({
+                fontSize: 15,
+                top: -25,
+            }, 'fast');
+            $(this).siblings('.separator').animate({
+                width: '100%',
+            }, 'fast', function () {
+
+            });
+            focusAnimationPermission = true;
+        }
     });
 
     // Field on blur
+    var blurAnimationPermission = true;
     $('.field').on('blur', function() {
-        if (!$(this).val()) {
-            $(this).siblings('label').animate({
-                fontSize: 20,
-                top: 0,
-            }, 'fast');
+        if (blurAnimationPermission) {
+            blurAnimationPermission = false;
+            if (!$(this).val()) {
+                $(this).siblings('label').animate({
+                    fontSize: 20,
+                    top: 0,
+                }, 'fast');
+            }
+            $(this).siblings('.separator').animate({
+                width: 0
+            }, 'fast', function () {
+                blurAnimationPermission = true;
+            });
         }
-        $(this).siblings('.separator').animate({
-            width: 0
-        }, 'fast');
     });
 
     // Error-icon hover
@@ -86,7 +99,7 @@ jQuery(document).ready(function($) {
             element.siblings('.submit-icon').removeClass('error-icon').addClass('success-icon');
         },
         submitHandler: function(form) {
-                var $submitButton = $(this).find(':submit');
+                var $submitButton = $(form).find(':submit');
                 $submitButton.prop('disabled', true);
                 $submitButton.val('Sending...');
                 var data = $(form).serialize();
@@ -123,6 +136,8 @@ jQuery(document).ready(function($) {
         } else {
             $('.radio-group>.error-text').css('background', 'linear-gradient(140deg, #e52810, #e56520, #dd6c02)');
         }
-        $('.radio-group>.error-text').fadeIn('fast').delay(3000).fadeOut('fast');
+        $('.radio-group>.error-text').fadeIn('fast').delay(3000).fadeOut('fast', function() {
+            $(':submit').prop('disabled', false);
+        });
     }
 });
