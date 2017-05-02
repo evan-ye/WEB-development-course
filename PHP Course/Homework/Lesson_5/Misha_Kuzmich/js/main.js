@@ -39,7 +39,7 @@ $(document).ready(function() {
 				console.log(status);
 				if(status === "false"){
 					validEmail = false;
-					msg('Извините, но такой адрес уже зарегестрирован.');
+					showMsg('Извините, но такой адрес уже зарегестрирован.');
 					$('.email_status').html('<div class="exist"></div>');
 					$('.email_status').css('display','block');
 				}
@@ -67,14 +67,11 @@ $(document).ready(function() {
 				return false;
 			}
 			valid = true;
-		})
-		// if (valid == false) {
-		// 	expression
-		// }
+		});
 		if(valid == true && validEmail == false){
 			$('#email').select();
 			console.log(validEmail);
-			msg('Извините, но такой адрес уже зарегестрирован.');
+			showMsg('Извините, но такой адрес уже зарегестрирован.');
 			return false;
 		}
 		if(valid && validEmail){
@@ -84,34 +81,40 @@ $(document).ready(function() {
 				data: $('form').serialize(),
 			})
 			.done(function(data) {
-				$('.email_status').css('display','none')
-				$('form').trigger('reset');
-				valid = false;
-				validEmail = false; 
+				$('.email_status').css('display','none');
 				data = JSON.parse(data);
-				console.log(data);
-				if(data.status == "ok"){
-					msg(data.msg, 'msg')
+				var status = data.status;
+				var type = data.type;
+				var msg = data.msg;
+				valid = false;
+				validEmail = false;
+				showMsg(msg,type)
+				if(status == "ok"){
+					console.log(data);
+					$('form').trigger('reset');
+					document.activeElement.blur();
 				}else{
-					msg(data.msg)
+					console.log(data);
 				}
 			})
 			.fail(function() {
 				alert("error");
 			})
 		}
-	})
+	});
 
 	function wrong(name) {
 		$('input[name=' + name + ']').select();
-		msg(regular[name].msg);
+		showMsg(regular[name].msg);
 	}
-	function msg(text, type) {
-		if(!type){
-			$('.infobox').html('<div class=error>' + text + "</div>");
-		}
-		else{
+	function showMsg(text, type="error") {
+		switch(type) {
+			case "message":
 			$('.infobox').html('<div class=msg>' + text + "</div>");
+			break;
+			case "error":
+			$('.infobox').html('<div class=error>' + text + "</div>");
+			break;
 		}
 		setTimeout(function() {$('.infobox').html('')},3000);
 	}
