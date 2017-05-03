@@ -12,9 +12,8 @@ jQuery(document).ready(function($) {
             $(this).siblings('.separator').animate({
                 width: '100%',
             }, 'fast', function () {
-
+                focusAnimationPermission = true;
             });
-            focusAnimationPermission = true;
         }
     });
 
@@ -68,7 +67,7 @@ jQuery(document).ready(function($) {
         messages: {
             firstname: "Can consist only of Latin letters and dashes",
             lastname: "Can consist only of Latin letters and dashes",
-            email: "Incorrect e-mail adress",
+            email: "Incorrect e-mail address",
             ticketType: "Please, choose ticket type"},
         rules: {
             firstname: {
@@ -122,10 +121,18 @@ jQuery(document).ready(function($) {
     // Show errors after response
     function showErrors(response) {
         for (key in response) {
-            if (response[key] == 0) {
+            if (!response[key]) {
                 $("input[name="+key+"]").siblings('.submit-icon').removeClass('success-icon').addClass('error-icon');
+                if (key == 'firstname' || key == 'lastname') {
+                    $("input[name="+key+"]").siblings('.error-text').text('Can consist only of Latin letters and dashes');
+                } else if (key == 'email') {
+                    $("input[name="+key+"]").siblings('.error-text').text('Incorrect e-mail address');
+                } else if (key == 'ticketType') {
+                    $('.radio-group>.error-text').text('Please, choose ticket type').fadeIn('fast').delay(3000).fadeOut('fast');
+                }
             }
         }
+        $(':submit').prop('disabled', false);
     }
 
     // Show response text
