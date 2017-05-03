@@ -1,25 +1,25 @@
 <?php
 
 class FormValidator {
-    public function validateName($name) {
+    public static function validateName($name) {
         return preg_match('/^[A-z-]+$/', $name);
     }
 
-    public function validateEmail($email) {
+    public static function validateEmail($email) {
         return preg_match('/^([A-z0-9_\.-]+)@([A-z0-9_\.-]+)\.([A-z\.]{2,6})$/', $email);
     }
 
-    public function validateTicketType($ticketType) {
+    public static function validateTicketType($ticketType) {
         return $ticketType === 'free' or $ticketType === 'standard' or $ticketType === 'premium';
     }
 
-    public function validateAll($firstname, $lastname, $email, $ticketType) {
+    public static function validateAll($firstname, $lastname, $email, $ticketType) {
         $response = [
             'errors' => -1,
-            'firstname' => $this->validateName($firstname),
-            'lastname' => $this->validateName($lastname),
-            'email' => $this->validateEmail($email),
-            'ticketType' => $this->validateTicketType($ticketType)
+            'firstname' => self::validateName($firstname),
+            'lastname' => self::validateName($lastname),
+            'email' => self::validateEmail($email),
+            'ticketType' => self::validateTicketType($ticketType)
         ];
 
         foreach ($response as $key => $value) {
