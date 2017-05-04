@@ -18,7 +18,7 @@ class response {
 			"type" => $this->type,
 			"msg" => $this->msg,
 		];
-		echo json_encode($obj);
+		die(json_encode($obj));
 	}
 }
 class user {
@@ -37,24 +37,29 @@ class user {
 		if(preg_match('/^[а-яА-ЯЇїЄєЁёa-zA-Z\s\.]{1,}$/u', $this->firstname) === 0){
 			$this->response->status = "fail";
 			$this->response->msg = "Не верно введено имя.";
+			$this->response->send();
 		}
 		if(preg_match('/^[а-яА-ЯЇїЄєЁёa-zA-Z\s\.]{1,}$/u', $this->secondname) === 0){
 			$this->response->status = "fail";
 			$this->response->msg = "Не верно введена фамилия.";
+			$this->response->send();
 		}
 		if(preg_match('/^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/', $this->email) === 0){
 			$this->response->status = "fail";
 			$this->response->msg = "Не верно указан email-адресс.";
+			$this->response->send();
 		}
 		$query = "SELECT * FROM users WHERE email = '" .$this->email."'";
 		$result = $db->query($query);
 		if($result->num_rows != 0){
 			$this->response->status = "fail";
 			$this->response->msg = "Такой email адресс уже есть в базе";
+			$this->response->send();
 		}
 		if(!$this->ticket){
 			$this->response->status = "fail";
 			$this->response->msg = $this->ticket;
+			$this->response->send();
 		}
 	}
 	public function insert(){
