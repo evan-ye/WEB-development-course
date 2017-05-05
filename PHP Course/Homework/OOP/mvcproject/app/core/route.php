@@ -3,12 +3,12 @@
 class Route {
 
 	static function init() {
-		
+
 		$controller_name = 'Index';
 		$action_name = 'index';
-		
+
 		$routes = explode('/', $_SERVER['REQUEST_URI']);
-		
+
 		if (!empty($routes[1])) {
 			$controller_name = ucfirst($routes[1]);
 		}
@@ -34,7 +34,7 @@ class Route {
 
 		$controller_file = ucfirst($controller_name).'.php';
 		$controller_path = PATH.'/app/class/controllers/'.$controller_file;
-		
+
 		try {
 			if (file_exists($controller_path)) {
 				require $controller_path;
@@ -46,7 +46,7 @@ class Route {
 			LogErrors::writeError($error);
 			self::errorPage();
 		}
-		
+
 		$controller = new $controller_name;
 		$action = $action_name;
 

@@ -582,5 +582,261 @@ class MyClass {
 
 
 
+// Перегрузка вызова несуществующих методов
+/*
+class  MyClass  {
+    function  __call($name,  $params){
+        print("Попытка  вызова  метода  $name со  следующими  параметрами:  ");
+        print_r($params);
+    }
+}
+
+$obj = new MyClass();
+$obj->megaMethod(1,2,3,"четыре");
+*/
+
+
+
+// Метод __toString()
+/*
+class MyClass {
+    function __toString(){
+        return 'Вызван  метод __toString()';
+    }
+}
+$obj = new MyClass();
+echo $obj;
+*/
+
+
+
+// Разыменовывание объектов
+/*
+class MyClass1 {
+    public function showClassName() {
+        echo "Объект класса MyClass1";
+    }
+}
+
+
+class MyClass2 {
+    public function showClassName() {
+        echo "Объект класса MyClass2";
+    }
+}
+
+
+function deref($obj) {
+    switch ($obj) {
+        case "MyClass1": return new MyClass1();
+        case "MyClass2": return new MyClass2();
+    }
+}
+
+
+deref("MyClass1")->showClassName(); //Объект класса MyClass1
+deref("MyClass2")->showClassName(); //Объект класса MyClass2
+*/
+
+
+
+// Уточнение типа класса
+/*
+interface Int1 {
+    function func1(Int1 $int1);
+}
+interface Int2 {
+    function func2(Int2 $int2);
+}
+
+class MyClass implements Int1, Int2 {
+    public function func1(Int1 $int1)   {
+        // Код метода
+    }
+    public function func2(Int2 $int2)   {
+        //  Код метода
+    }
+}
+
+
+$obj1 = new MyClass;
+$obj2 = new MyClass;
+
+$obj1->func1($obj2);
+$obj1->func2($obj2);
+*/
+
+
+
+// Traits
+/*
+trait first_trait {
+    function first_method() { echo 'first_method';}
+    function second_method() {  echo 'second_method'; }
+}
+
+
+class first_class {
+    // Using the Trait Here
+    use first_trait;
+}
+
+$obj = new first_class();
+$obj->first_method(); // valid
+$obj->second_method(); // valid
+*/
+
+
+
+// Using Multiple traits
+/*
+trait first_trait {
+    function first_method() { echo "method1"; }
+}
+
+trait second_trait {
+    function second_method() { echo "method2"; }
+}
+
+
+class first_class
+{
+    // now using more than one trait
+    use first_trait, second_trait;
+}
+
+$obj= new first_class();
+// Valid
+$obj->first_method(); // Print : method1
+// Valid
+$obj->second_method(); // Print : method2
+*/
+
+
+
+// Traits Contains the Trait
+/*
+trait first_trait {
+    function first_method() { echo "method1"; }
+}
+
+
+trait second_trait {
+    use first_trait;
+    function second_method() { echo "method2"; }
+}
+
+
+class first_class {
+    // now using
+    use second_trait;
+}
+
+$obj= new first_class();
+
+// Valid
+$obj->first_method(); // Print : method1
+
+// Valid
+$obj->second_method(); // Print : method2
+*/
+
+
+
+// Abstract Methods in Traits
+/*
+trait first_trait {
+    function first_method() { echo "method1"; }
+    // any class which use this trait must
+    // have to implement below method.
+    abstract public function second_method();
+}
+
+class first_method {
+    use first_trait;
+
+    function second_method() {
+        // Code here
+    }
+}*/
+
+
+
+// Conflicts in Traits
+/*
+trait first_trait {
+    function first_function() {
+        echo "From First Trait";
+    }
+}
+
+trait second_trait {
+    function first_function() {
+        echo "From Second Trait";
+    }
+}
+
+class first_class {
+    use first_trait, second_trait {
+        first_trait::first_function insteadof second_trait;
+        second_trait::first_function as second_function;
+
+    }
+}
+
+$obj = new first_class();
+$obj->first_function();
+$obj->second_function();
+*/
+
+
+
+
+// Автозагрузка классов
+
+// __autoload() - deprecated
+
+// bool spl_autoload_register ([ callable $autoload_function [, bool $throw = true [, bool $prepend = false ]]] )
+
+
+function loadClass ($class_name) {
+    require_once "classes/$class_name.class.php";
+}
+
+function loadInterface ($class_name) {
+    require_once "classes/$class_name.interface.php";
+}
+
+function loadSomething ($class_name) {
+    // ...
+}
+
+
+class Main{
+    public static function autoload($class_name){
+        require_once "classes/$class_name.class.php";
+    }
+}
+
+
+// Регистрация функций
+spl_autoload_register('loadClass');
+spl_autoload_register('loadSomething');
+spl_autoload_register('loadInterface', true, 1);
+
+
+// Список зарегистрированных функций
+// var_dump(spl_autoload_functions());
+
+
+// Удаление функции из списка зарегистрированных
+spl_autoload_unregister('loadSomething');
+var_dump(spl_autoload_functions());
+
+
+// Регистрация статического метода класса
+spl_autoload_register(['Main', 'autoload']);
+
+
 
 
