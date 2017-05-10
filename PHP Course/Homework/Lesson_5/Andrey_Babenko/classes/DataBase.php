@@ -1,14 +1,23 @@
 <?php
 class DataBase {
+    private static $host = 'localhost';
+    private static $username = 'root';
+    private static $password = 'root';
+    private static $database = 'andreyBabenkoDB';
+
     public static function createDB() {
         // Connect to host
-        $conn = new mysqli('localhost', 'root', 'root');
-        // Create database if not exists
-        $conn->query("CREATE DATABASE IF NOT EXISTS andreyBabenkoDB");
-        $conn->close();
+        $pdo = new PDO('mysql:host='.self::$host , self::$username, self::$password);
+        $pdo->exec("CREATE DATABASE IF NOT EXISTS ".self::$database);
+        $pdo = null;
     }
 
-    public static function createTable($conn) {
+    public static function openConn() {
+        $pdo = new PDO('mysql:host='.self::$host.';dbname='.self::$database , self::$username, self::$password);
+        return $pdo;
+    }
+
+    public static function createTable($pdo) {
         // Create table if not exists
         $createTableQuery = "CREATE TABLE IF NOT EXISTS users(
                           id int(4) NOT NULL auto_increment,
@@ -20,17 +29,17 @@ class DataBase {
                           PRIMARY KEY (id)
                           )
         ";
-        $conn->query($createTableQuery);
+        $pdo->exec($createTableQuery);
     }
 
-    public static function checkEmail($conn, $email, $response) {
+    public static function checkEmail($pdo, $email, $response) {
         // Select today's user emails
         $selectTodayEmail = "SELECT email FROM users
                           WHERE DATE(regdate) = CURDATE() 
      ";
-        $result = $conn->query($selectTodayEmail);
+        $stmt = $pdo->query($selectTodayEmail);
         // Email test for uniqueness
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($row['email'] == $email) {
                 $response['email'] = false;
                 $response['responseText'] = 'User with such e-mail is already registered';
@@ -40,10 +49,10 @@ class DataBase {
         return $response;
     }
 
-    public static function addUser($conn, $firstname, $lastname, $email, $ticketType) {
+    public static function addUser($pdo, $firstname, $lastname, $email, $ticketType) {
         $addNewUserQuery = "INSERT INTO users (firstname, lastname, email, ticketType)
                               VALUES ('$firstname', '$lastname', '$email', '$ticketType')
          ";
-        $conn->query($addNewUserQuery);
+        $pdo->exec($addNewUserQuery);
     }
 }
