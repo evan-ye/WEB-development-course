@@ -1,4 +1,9 @@
 <?php
+// Class autoload
+function loadClass ($class_name) {
+    require_once "classes/".$class_name.".php";
+}
+spl_autoload_register('loadClass');
 //Getting data
 if (isset($HTTP_RAW_POST_DATA)) {
     $body = $HTTP_RAW_POST_DATA;
@@ -15,26 +20,22 @@ $email = $data['email'];
 $ticketType = $data['ticketType'];
 
 // From validation
-require_once ('classes/FormValidator.php');
-$response = FormValidator::validateAll($firstname, $lastname, $email , $ticketType);
+$response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType);
 
 // Main logic
 if ($response['errors']) {
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 } else {
-    require_once('classes/DataBase.php');
     DataBase::createDB();
-    $conn = new mysqli('localhost', 'root', 'root', 'andreyBabenkoDB');
-    DataBase::createTable($conn);
-    $response = DataBase::checkEmail($conn, $email, $response);
-    // Add new user
+    $pdo = DataBase::openConn();
+    DataBase::createTable($pdo);
+    $response = DataBase::checkEmail($pdo, $email, $response);
     if ($response['email']) {
-        DataBase::addUser($conn, $firstname, $lastname, $email, $ticketType);
+        $result = DataBase::addUser($pdo, $firstname, $lastname, $email, $ticketType);
         $response['responseText'] = "New user created successfully";
     }
-    $conn->close();
-
+    $pdo = null;
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 }
