@@ -10,6 +10,6 @@ define('DB_CONFIG', 'mysql:host=localhost; charset=utf8');
 
 define('USER','root');
 
-define('PASS','');
+define('PASS','root');
 
 define('VIEW', PATH.'/app/class/views/');
