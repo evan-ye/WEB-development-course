@@ -28,6 +28,7 @@
             <div class="error-text"></div>
             <div class="separator"></div>
         </div>
+        <h2>Choose ticket type</h2>
         <div class="radio-group">
             <label for="ticket-free">Free</label>
             <input type="radio" name="ticketType" id="ticket-free" value="free" required>
@@ -36,6 +37,15 @@
             <label for="ticket-premium">Premium</label>
             <input type="radio" name="ticketType" id="ticket-premium" value="premium" required>
             <p class="error-text"></p>
+        </div>
+        <h2>Choose save option</h2>
+        <div class="radio-group save-option">
+            <label for="mysql">MySQL</label>
+            <input type="radio" name="saveOption" id="mysql" value="MySqlDataBase" checked>
+            <label for="file">File</label>
+            <input type="radio" name="saveOption" id="file" value="FileDataBase">
+            <label for="xml">XML</label>
+            <input type="radio" name="saveOption" id="xml" value="XMLDataBase">
         </div>
 
         <button type="submit"><span>Send</span></button>

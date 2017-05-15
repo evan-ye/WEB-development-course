@@ -18,6 +18,7 @@ $firstname = $data['firstname'];
 $lastname = $data['lastname'];
 $email = $data['email'];
 $ticketType = $data['ticketType'];
+$saveOption = $data['saveOption'];
 
 // From validation
 $response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType);
@@ -27,15 +28,13 @@ if ($response['errors']) {
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 } else {
-    DataBase::createDB();
-    $pdo = DataBase::openConn();
-    DataBase::createTable($pdo);
-    $response = DataBase::checkEmail($pdo, $email, $response);
+    $saveOption::createDB();
+    $saveOption::createTable();
+    $response = $saveOption::checkEmail($email, $response);
     if ($response['email']) {
-        $result = DataBase::addUser($pdo, $firstname, $lastname, $email, $ticketType);
+        $result = $saveOption::addUser($firstname, $lastname, $email, $ticketType);
         $response['responseText'] = "New user created successfully";
     }
-    $pdo = null;
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 }
