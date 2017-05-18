@@ -36,8 +36,7 @@ $(document).ready(function() {
 			$.post('../scripts/checkEmail.php', {email : $('#email').val()}, function(data) {
 				data = JSON.parse(data);
 				status = data.status;
-				console.log(status);
-				if(status === "false"){
+				if(status === "fail"){
 					validEmail = false;
 					showMsg('Извините, но такой адрес уже зарегестрирован.');
 					$('.email_status').html('<div class="exist"></div>');
@@ -84,18 +83,14 @@ $(document).ready(function() {
 				$('.email_status').css('display','none');
 				data = JSON.parse(data);
 				var status = data.status;
-				var type = data.type;
 				var msg = data.msg;
 				valid = false;
 				validEmail = false;
-				showMsg(msg,type)
-				if(status == "ok"){
-					console.log(data);
-					$('form').trigger('reset');
-					document.activeElement.blur();
-				}else{
-					console.log(data);
-				}
+
+				showMsg(msg,status);
+				console.log(data);
+				$('form').trigger('reset');
+				document.activeElement.blur();	
 			})
 			.fail(function() {
 				alert("error");
@@ -107,12 +102,12 @@ $(document).ready(function() {
 		$('input[name=' + name + ']').select();
 		showMsg(regular[name].msg);
 	}
-	function showMsg(text, type="error") {
+	function showMsg(text, type="fail") {
 		switch(type) {
-			case "message":
+			case "ok":
 			$('.infobox').html('<div class=msg>' + text + "</div>");
 			break;
-			case "error":
+			case "fail":
 			$('.infobox').html('<div class=error>' + text + "</div>");
 			break;
 		}
