@@ -19,9 +19,9 @@
 			<input id=email type="email" name="email" class="form__input email">
 			<div class="email_status"></div>
 			Тип билета:<br>
-			<input type="radio" id="free" name="type" value="free" checked><label for="free">free</label><br>
-			<input type="radio" id="regular" name="type" value="regular" ><label for="regular">regular</label><br>
-			<input type="radio" id="premium" name="type" value="premium" ><label for="premium">premium</label>
+			<input type="radio" id="free" name="ticket" value="free" checked><label for="free">free</label><br>
+			<input type="radio" id="regular" name="ticket" value="regular" ><label for="regular">regular</label><br>
+			<input type="radio" id="premium" name="ticket" value="premium" ><label for="premium">premium</label>
 			<input class="submit_button" type="submit">
 			<div class="infobox">
 				<!-- some errors -->
