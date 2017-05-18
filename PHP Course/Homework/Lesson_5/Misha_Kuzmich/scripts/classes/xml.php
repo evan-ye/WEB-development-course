@@ -14,7 +14,6 @@ class xml{
 	}
 	public function insertNew($userdata)
 	{
-		echo $user->firstname;
 		$dom = self::$dom;
 		$user = $dom->addChild('user');
 		$user->addChild("firstname", $userdata->firstname);
