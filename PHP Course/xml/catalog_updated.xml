@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet  type="text/css" href="books.css"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <catalog>
 
 	<book>
@@ -11,7 +9,7 @@
 	</book>
 
 	<book>
-		<author>Алекс Хоумер</author>
+		<author>New Author</author>
 		<title>Dimanic HTML</title>
 		<pubyear>2004</pubyear>
 		<price>120</price>

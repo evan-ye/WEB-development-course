@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet  type="text/css" href="books.css"?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <catalog>
 
 	<book>
@@ -87,4 +85,5 @@
 		<price>150</price>
 	</book>
 
+<book><title>PHP7</title></book>
 </catalog>
