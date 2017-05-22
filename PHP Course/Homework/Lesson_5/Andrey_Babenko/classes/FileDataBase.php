@@ -12,12 +12,12 @@ class FileDataBase implements DataBaseEntity {
         return $conn;
     }
 
-    public static function createDB() {
+    public static function createDataSource() {
         mkdir('users', 0777);
         mkdir('users/txt', 0777);
     }
 
-    public static function createTable() {
+    public static function createRecord() {
         //Empty function
     }
 

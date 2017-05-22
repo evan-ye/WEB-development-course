@@ -13,13 +13,14 @@ class FormValidator {
         return $ticketType === 'free' or $ticketType === 'standard' or $ticketType === 'premium';
     }
 
-    public static function validateAll($firstname, $lastname, $email, $ticketType) {
+    public static function validateAll($firstname, $lastname, $email, $ticketType, $checkText) {
         $response = [
             'errors' => -1,
             'firstname' => self::validateName($firstname),
             'lastname' => self::validateName($lastname),
             'email' => self::validateEmail($email),
-            'ticketType' => self::validateTicketType($ticketType)
+            'ticketType' => self::validateTicketType($ticketType),
+            'checkText' => Captcha::checkCaptcha($checkText)
         ];
 
         foreach ($response as $key => $value) {

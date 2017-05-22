@@ -53,6 +53,13 @@ jQuery(document).ready(function($) {
         });
     } );
 
+    // Captcha Refresh Icon
+    $('.refresh-icon').on('click', function() {
+        $('.captcha-image').attr({
+            src:'images/get-captcha-image.php?hash='+Math.random()*100000
+        });
+    });
+
     // Form validation
     $.validator.addMethod(
         "regex",
@@ -112,6 +119,7 @@ jQuery(document).ready(function($) {
                         } else {
                             showResponsText(response);
                         }
+                        $submitButton.prop('disabled', false);
                     },
                     method: 'post'
                 });
@@ -124,27 +132,26 @@ jQuery(document).ready(function($) {
             if (!response[key]) {
                 $("input[name="+key+"]").siblings('.submit-icon').removeClass('success-icon').addClass('error-icon');
                 if (key == 'firstname' || key == 'lastname') {
-                    $("input[name="+key+"]").siblings('.error-text').text('Can consist only of Latin letters and dashes');
+                    $("input[name="+key+"]").siblings('.error-text').text('Can consist only of Latin letters and dashes').fadeIn('fast').delay(3000).fadeOut('fast');
                 } else if (key == 'email') {
-                    $("input[name="+key+"]").siblings('.error-text').text('Incorrect e-mail address');
+                    $("input[name="+key+"]").siblings('.error-text').text('Incorrect e-mail address').fadeIn('fast').delay(3000).fadeOut('fast');
                 } else if (key == 'ticketType') {
-                    $('.radio-group>.error-text').text('Please, choose ticket type').fadeIn('fast').delay(3000).fadeOut('fast');
+                    $('form>.error-text').text('Please, choose ticket type').fadeIn('fast').delay(3000).fadeOut('fast');
+                } else if (key == 'checkText') {
+                    $("input[name="+key+"]").siblings('.error-text').text('Incorrect text from image').fadeIn('fast').delay(3000).fadeOut('fast');
                 }
             }
         }
-        $(':submit').prop('disabled', false);
     }
 
     // Show response text
     function showResponsText(response) {
-        $('.radio-group>.error-text').html(response.responseText);
+        $('form>.error-text').html(response.responseText);
         if (response.email) {
-            $('.radio-group>.error-text').css('background', 'linear-gradient(140deg, #84bd00, #00bdea, #a265e2)');
+            $('form>.error-text').css('background', 'linear-gradient(140deg, #84bd00, #00bdea, #a265e2)');
         } else {
-            $('.radio-group>.error-text').css('background', 'linear-gradient(140deg, #e52810, #e56520, #dd6c02)');
+            $('form>.error-text').css('background', 'linear-gradient(140deg, #e52810, #e56520, #dd6c02)');
         }
-        $('.radio-group>.error-text').fadeIn('fast').delay(3000).fadeOut('fast', function() {
-            $(':submit').prop('disabled', false);
-        });
+        $('form>.error-text').fadeIn('fast').delay(3000).fadeOut('fast');
     }
 });

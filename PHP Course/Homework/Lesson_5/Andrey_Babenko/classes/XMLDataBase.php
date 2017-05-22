@@ -7,12 +7,12 @@ class XMLDataBase implements DataBaseEntity {
         return $path;
     }
 
-    static function createDB() {
+    static function createDataSource() {
         mkdir('users', 0777);
         mkdir('users/xml', 0777);
     }
 
-    static function createTable() {
+    static function createRecord() {
         if (!file_exists(self::getPath())) {
             $doc = new DOMDocument('1.0');
 
