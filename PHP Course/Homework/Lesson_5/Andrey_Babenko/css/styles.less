@@ -52,16 +52,16 @@ form {
     border-radius: 0;
   }
   h1 {
-    font-size: 40px;
-    margin-bottom: 40px;
+    font-size: 30px;
+    margin-bottom: 30px;
   }
   h2 {
-    font-size: 25px;
-    margin-bottom: 15px;
+    font-size: 20px;
+    margin-bottom: 10px;
   }
   .field-block {
     width: 95%;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     border-bottom: 1px solid #ffffff;
     position: relative;
     label {
@@ -119,13 +119,14 @@ form {
   }
   .radio-group {
     width: 95%;
-    margin-bottom: 25px;
     border: none;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     label {
-      width: 21%;
+      font-size: 15px;
+      padding: 3px;
+      width: 29%;
       border: 1px solid #ffffff;
       background: none;
       color: #ffffff;
@@ -149,23 +150,43 @@ form {
         transition: .3s ease-in-out;
       }
     }
-    p.error-text {
-      width: 100%;
-      margin-top: 10px;
-      text-align: center;
-      font-size: 12px;
-      border-radius: 5px;
-      .background-gradient;
-      background: linear-gradient(140deg, #e52810, #e56520, #dd6c02);
-    }
   }
-}
+  .save-option {
+    margin-bottom: 30px;
+  }
   input[type="radio"] {
     opacity: 0;
+  }
+  .captcha-block {
+    position: relative;
+    margin-bottom: 30px;
+    .captcha-image {
+      width: 300px;
+      height: 50px;
+    }
+    .refresh-icon {
+      .field-block>.submit-icon;
+      -webkit-mask-image: url('../images/refresh.svg');
+      mask-image: url('../images/refresh.svg');
+      .background-gradient;
+      cursor: pointer;
+      position: absolute;
+      right: -25px;
+    }
+  }
+  p.error-text {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 5px;
+    .background-gradient;
+    background: linear-gradient(140deg, #e52810, #e56520, #dd6c02);
   }
   button[type="submit"] {
     width: 200px;
     height: 40px;
+    margin-top: 20px;
     font-size: 20px;
     color: #ffffff;
     letter-spacing: 2px;
@@ -178,5 +199,6 @@ form {
     &:hover {
       transform: scale(1.1);
       transition: .3s ease-in-out;
+    }
   }
 }

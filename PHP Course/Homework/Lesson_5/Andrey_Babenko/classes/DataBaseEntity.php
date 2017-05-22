@@ -2,9 +2,9 @@
 
 interface DataBaseEntity {
 
-    static function createDB();
+    static function createDataSource();
 
-    static function createTable();
+    static function createRecord();
 
     static function checkEmail($email, $response);
 

@@ -77,16 +77,16 @@ form {
   }
 }
 form h1 {
-  font-size: 40px;
-  margin-bottom: 40px;
+  font-size: 30px;
+  margin-bottom: 30px;
 }
 form h2 {
-  font-size: 25px;
-  margin-bottom: 15px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 form .field-block {
   width: 95%;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   border-bottom: 1px solid #ffffff;
   position: relative;
 }
@@ -160,14 +160,15 @@ form .field-block .separator {
 }
 form .radio-group {
   width: 95%;
-  margin-bottom: 25px;
   border: none;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 form .radio-group label {
-  width: 21%;
+  font-size: 15px;
+  padding: 3px;
+  width: 29%;
   border: 1px solid #ffffff;
   background: none;
   color: #ffffff;
@@ -203,9 +204,41 @@ form .radio-group label.ui-state-active:hover {
   border: none;
   transition: 0.3s ease-in-out;
 }
-form .radio-group p.error-text {
+form .save-option {
+  margin-bottom: 30px;
+}
+form input[type="radio"] {
+  opacity: 0;
+}
+form .captcha-block {
+  position: relative;
+  margin-bottom: 30px;
+}
+form .captcha-block .captcha-image {
+  width: 300px;
+  height: 50px;
+}
+form .captcha-block .refresh-icon {
+  width: 20px;
+  height: 20px;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  top: 5px;
+  right: 5px;
+  -webkit-mask-image: url('../images/refresh.svg');
+  mask-image: url('../images/refresh.svg');
+  background: linear-gradient(140deg, #84bd00, #00bdea, #a265e2);
+  background-size: 600% 600%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  cursor: pointer;
+  position: absolute;
+  right: -25px;
+}
+form p.error-text {
   width: 100%;
-  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
   font-size: 12px;
   border-radius: 5px;
@@ -216,12 +249,10 @@ form .radio-group p.error-text {
   animation: AnimationName 30s ease infinite;
   background: linear-gradient(140deg, #e52810, #e56520, #dd6c02);
 }
-input[type="radio"] {
-  opacity: 0;
-}
-button[type="submit"] {
+form button[type="submit"] {
   width: 200px;
   height: 40px;
+  margin-top: 20px;
   font-size: 20px;
   color: #ffffff;
   letter-spacing: 2px;
@@ -236,7 +267,7 @@ button[type="submit"] {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
-button[type="submit"]:hover {
+form button[type="submit"]:hover {
   transform: scale(1.1);
   transition: 0.3s ease-in-out;
 }

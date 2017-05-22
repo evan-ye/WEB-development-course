@@ -18,18 +18,24 @@ $firstname = $data['firstname'];
 $lastname = $data['lastname'];
 $email = $data['email'];
 $ticketType = $data['ticketType'];
+$checkText = $data['checkText'];
 $saveOption = $data['saveOption'];
 
 // From validation
-$response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType);
+$response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType,$checkText);
+
+if (!Captcha::checkCaptcha($checkText)) {
+    $response['errors']++;
+    $response['responseText'] = "Incorrect text from image";
+}
 
 // Main logic
 if ($response['errors']) {
     $jsonResponse = json_encode($response);
     echo $jsonResponse;
 } else {
-    $saveOption::createDB();
-    $saveOption::createTable();
+    $saveOption::createDataSource();
+    $saveOption::createRecord();
     $response = $saveOption::checkEmail($email, $response);
     if ($response['email']) {
         $result = $saveOption::addUser($firstname, $lastname, $email, $ticketType);

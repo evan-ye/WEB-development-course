@@ -11,12 +11,12 @@ class MySqlDataBase implements DataBaseEntity {
         return $conn;
     }
 
-    public static function createDB() {
+    public static function createDataSource() {
         $conn = new PDO('mysql:host='.self::$host , self::$username, self::$password);
         $conn->exec("CREATE DATABASE IF NOT EXISTS ".self::$database);
     }
 
-    public static function createTable() {
+    public static function createRecord() {
         $createTableQuery = "CREATE TABLE IF NOT EXISTS users(
                           id int(4) NOT NULL auto_increment,
                           firstname varchar(50) NOT NULL default '',
