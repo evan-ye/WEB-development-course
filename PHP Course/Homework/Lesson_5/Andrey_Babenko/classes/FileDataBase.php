@@ -26,6 +26,7 @@ class FileDataBase implements DataBaseEntity {
         foreach ($fileContent as $userDataString) {
             $userData = explode(",", $userDataString);
             if ($userData[2] == $email) {
+                $response['errors']++;
                 $response['email'] = false;
                 $response['responseText'] = 'User with such e-mail is already registered';
                 break;

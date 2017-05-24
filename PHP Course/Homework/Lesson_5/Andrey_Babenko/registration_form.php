@@ -22,25 +22,21 @@ $checkText = $data['checkText'];
 $saveOption = $data['saveOption'];
 
 // From validation
-$response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType,$checkText);
+$response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType, $checkText);
 
 if (!Captcha::checkCaptcha($checkText)) {
     $response['errors']++;
-    $response['responseText'] = "Incorrect text from image";
 }
 
 // Main logic
-if ($response['errors']) {
-    $jsonResponse = json_encode($response);
-    echo $jsonResponse;
-} else {
+if (!$response['errors']) {
     $saveOption::createDataSource();
     $saveOption::createRecord();
     $response = $saveOption::checkEmail($email, $response);
-    if ($response['email']) {
+    if (!$response['errors']) {
         $result = $saveOption::addUser($firstname, $lastname, $email, $ticketType);
         $response['responseText'] = "New user created successfully";
     }
-    $jsonResponse = json_encode($response);
-    echo $jsonResponse;
 }
+$jsonResponse = json_encode($response);
+echo $jsonResponse;

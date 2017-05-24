@@ -52,7 +52,7 @@
         </div>
         <div class="field-block">
             <label for="check-text-field">Enter text from image</label>
-            <input type="text" name="checkText" id="check-text-field" class="field" maxlength="10" required>
+            <input type="text" name="checkText" id="check-text-field" class="field" maxlength="5">
             <div class="submit-icon"></div>
             <div class="error-text"></div>
             <div class="separator"></div>
