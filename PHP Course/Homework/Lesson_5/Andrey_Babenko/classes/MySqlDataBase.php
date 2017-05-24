@@ -1,6 +1,17 @@
 <?php
 
 class MySqlDataBase implements DataBaseEntity {
+    private static $instance = null;
+    private function __construct() {}
+    private function __clone() {}
+
+    static function getInstance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
     private static $host = 'localhost';
     private static $username = 'root';
     private static $password = 'root';
@@ -11,12 +22,12 @@ class MySqlDataBase implements DataBaseEntity {
         return $conn;
     }
 
-    public static function createDataSource() {
+    function createDataSource() {
         $conn = new PDO('mysql:host='.self::$host , self::$username, self::$password);
         $conn->exec("CREATE DATABASE IF NOT EXISTS ".self::$database);
     }
 
-    public static function createRecord() {
+    function createRecord() {
         $createTableQuery = "CREATE TABLE IF NOT EXISTS users(
                           id int(4) NOT NULL auto_increment,
                           firstname varchar(50) NOT NULL default '',
@@ -31,7 +42,7 @@ class MySqlDataBase implements DataBaseEntity {
         $conn->exec($createTableQuery);
     }
 
-    public static function checkEmail($email, $response) {
+    function checkEmail($email, $response) {
         $selectTodayEmail = "SELECT email FROM users
                           WHERE DATE(regdate) = CURDATE() 
      ";
@@ -48,7 +59,7 @@ class MySqlDataBase implements DataBaseEntity {
         return $response;
     }
 
-    public static function addUser($firstname, $lastname, $email, $ticketType) {
+    function addUser($firstname, $lastname, $email, $ticketType) {
         $conn = self::openConn();
         $addNewUserQuery = "INSERT INTO users (firstname, lastname, email, ticketType)
                               VALUES ('$firstname', '$lastname', '$email', '$ticketType')

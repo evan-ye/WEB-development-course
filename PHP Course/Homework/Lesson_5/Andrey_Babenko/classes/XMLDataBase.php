@@ -1,18 +1,28 @@
 <?php
 
 class XMLDataBase implements DataBaseEntity {
+    private static $instance = null;
+    private function __construct() {}
+    private function __clone() {}
+
+    function getInstance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
     private function getPath() {
         $path = "users/xml/registration_".date('d_m_Y').".xml";
         return $path;
     }
 
-    static function createDataSource() {
+    function createDataSource() {
         mkdir('users', 0777);
         mkdir('users/xml', 0777);
     }
 
-    static function createRecord() {
+    function createRecord() {
         if (!file_exists(self::getPath())) {
             $doc = new DOMDocument('1.0');
 
@@ -23,7 +33,7 @@ class XMLDataBase implements DataBaseEntity {
         }
     }
 
-    static function checkEmail($email, $response) {
+    function checkEmail($email, $response) {
         $doc = new DOMDocument();
         $doc->load(self::getPath());
 
@@ -40,7 +50,7 @@ class XMLDataBase implements DataBaseEntity {
         return $response;
     }
 
-    static function addUser($firstname, $lastname, $email, $ticketType) {
+    function addUser($firstname, $lastname, $email, $ticketType) {
         $doc = new DOMDocument('1.0');
         $doc->formatOutput = true;
         $doc->preserveWhiteSpace = false;

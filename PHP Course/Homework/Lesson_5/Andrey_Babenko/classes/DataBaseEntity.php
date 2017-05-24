@@ -2,11 +2,11 @@
 
 interface DataBaseEntity {
 
-    static function createDataSource();
+    function createDataSource();
 
-    static function createRecord();
+    function createRecord();
 
-    static function checkEmail($email, $response);
+    function checkEmail($email, $response);
 
-    static function addUser($firstname, $lastname, $email, $ticketType);
+    function addUser($firstname, $lastname, $email, $ticketType);
 }

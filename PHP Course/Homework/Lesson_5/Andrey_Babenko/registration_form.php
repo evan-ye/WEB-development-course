@@ -30,11 +30,12 @@ if (!Captcha::checkCaptcha($checkText)) {
 
 // Main logic
 if (!$response['errors']) {
-    $saveOption::createDataSource();
-    $saveOption::createRecord();
-    $response = $saveOption::checkEmail($email, $response);
+    $database = DataBaseFactory::createDataBase($saveOption);
+    $database->createDataSource();
+    $database->createRecord();
+    $response = $database->checkEmail($email, $response);
     if (!$response['errors']) {
-        $result = $saveOption::addUser($firstname, $lastname, $email, $ticketType);
+        $result = $database->addUser($firstname, $lastname, $email, $ticketType);
         $response['responseText'] = "New user created successfully";
     }
 }

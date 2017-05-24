@@ -1,6 +1,16 @@
 <?php
 
 class FileDataBase implements DataBaseEntity {
+    private static $instance = null;
+    private function __construct() {}
+    private function __clone() {}
+
+    function getInstance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
 
     private function getPath() {
         $path = "users/txt/registration_".date('d_m_Y').".txt";
@@ -12,16 +22,16 @@ class FileDataBase implements DataBaseEntity {
         return $conn;
     }
 
-    public static function createDataSource() {
+    function createDataSource() {
         mkdir('users', 0777);
         mkdir('users/txt', 0777);
     }
 
-    public static function createRecord() {
+    function createRecord() {
         //Empty function
     }
 
-    public static function checkEmail($email, $response) {
+    function checkEmail($email, $response) {
         $fileContent = file(self::getPath(), FILE_SKIP_EMPTY_LINES);
         foreach ($fileContent as $userDataString) {
             $userData = explode(",", $userDataString);
@@ -35,7 +45,7 @@ class FileDataBase implements DataBaseEntity {
         return $response;
     }
 
-    public static function addUser($firstname, $lastname, $email, $ticketType) {
+    function addUser($firstname, $lastname, $email, $ticketType) {
         $conn = self::openConn();
         fwrite($conn, $firstname.",".$lastname.",".$email.",".$ticketType."\n");
         fclose($conn);
