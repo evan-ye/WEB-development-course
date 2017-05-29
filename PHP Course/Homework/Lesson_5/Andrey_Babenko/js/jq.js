@@ -149,12 +149,14 @@ jQuery(document).ready(function($) {
 
     // Show response text
     function showResponsText(response) {
-        $('form>.error-text').html(response.responseText);
-        if (!response.errors) {
-            $('form>.error-text').css('background', 'linear-gradient(140deg, #84bd00, #00bdea, #a265e2)');
-        } else {
-            $('form>.error-text').css('background', 'linear-gradient(140deg, #e52810, #e56520, #dd6c02)');
+        if (response.responseText) {
+            $('form>.error-text').html(response.responseText);
+            if (!response.errors) {
+                $('form>.error-text').css('background', 'linear-gradient(140deg, #84bd00, #00bdea, #a265e2)');
+            } else {
+                $('form>.error-text').css('background', 'linear-gradient(140deg, #e52810, #e56520, #dd6c02)');
+            }
+            $('form>.error-text').fadeIn('fast').delay(3000).fadeOut('fast');
         }
-        $('form>.error-text').fadeIn('fast').delay(3000).fadeOut('fast');
     }
 });

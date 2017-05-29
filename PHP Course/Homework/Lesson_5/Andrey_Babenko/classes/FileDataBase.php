@@ -33,11 +33,11 @@ class FileDataBase implements DataBaseEntity {
 
     function checkEmail($email, $response) {
         $fileContent = file(self::getPath(), FILE_SKIP_EMPTY_LINES);
-        foreach ($fileContent as $userDataString) {
+        $users = new UsersIterator($fileContent);
+        foreach ($users as $userDataString) {
             $userData = explode(",", $userDataString);
             if ($userData[2] == $email) {
                 $response['errors']++;
-                $response['email'] = false;
                 $response['responseText'] = 'User with such e-mail is already registered';
                 break;
             }

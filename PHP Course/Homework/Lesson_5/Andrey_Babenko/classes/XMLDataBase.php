@@ -42,7 +42,6 @@ class XMLDataBase implements DataBaseEntity {
         foreach ($emails as $user_email) {
             if ($user_email->nodeValue == $email) {
                 $response['errors']++;
-                $response['email'] = false;
                 $response['responseText'] = 'User with such e-mail is already registered';
                 break;
             }
