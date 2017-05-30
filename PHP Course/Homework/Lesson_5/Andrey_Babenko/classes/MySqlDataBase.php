@@ -51,7 +51,6 @@ class MySqlDataBase implements DataBaseEntity {
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($row['email'] == $email) {
                 $response['errors']++;
-                $response['email'] = false;
                 $response['responseText'] = 'User with such e-mail is already registered';
                 break;
             };
