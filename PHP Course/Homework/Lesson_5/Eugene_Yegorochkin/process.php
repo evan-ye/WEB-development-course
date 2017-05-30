@@ -7,7 +7,7 @@ else {
 }
 
 session_start();
-if($_POST['capcha'] != $_SESSION['capcha']) 
+if($_POST['capcha'] != $_SESSION['capcha'])
     echo "The letters in the graphic were entered incorrectly. Please try again.";
 else {
 
@@ -21,7 +21,7 @@ $ticket_type = $data['ticket_type'];
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 
 $conn = mysqli_connect($servername, $username, $password);
 if (!$conn) {
@@ -32,7 +32,7 @@ if (!$conn) {
  $conn->query("CREATE DATABASE IF NOT EXISTS myDB");
     $conn->close();
 
- $conn = new mysqli('localhost', 'root', '', 'myDB');
+ $conn = new mysqli('localhost', $username, $password, 'myDB');
 
     $createTable = "CREATE TABLE IF NOT EXISTS users(
                           id int(4) NOT NULL auto_increment,
@@ -55,13 +55,13 @@ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 if ($row['email'] == $email) {
             break;
         } else {
-                
+
                 $sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
                               VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
 
         }
 
-       
+
 }
 
 
@@ -72,7 +72,7 @@ if (mysqli_query($conn, $sql)) {
 } else {
     echo "This email already exists. Please try another email";
 }
-    
+
     $conn->close();
 
 

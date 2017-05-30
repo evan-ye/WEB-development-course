@@ -34,7 +34,7 @@ class Captcha {
     }
 
     static function checkCaptcha($input) {
-        session_start();
+        if(empty($_SESSION)) session_start();
         return strtolower($input) == strtolower($_SESSION['word']);
     }
 }
