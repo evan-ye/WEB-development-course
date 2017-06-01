@@ -2,7 +2,10 @@
 
 class XMLDataBase implements DataBaseEntity {
     private static $instance = null;
-    private function __construct() {}
+    private function __construct() {
+        mkdir('users', 0777);
+        mkdir('users/xml', 0777);
+    }
     private function __clone() {}
 
     function getInstance() {
@@ -12,15 +15,7 @@ class XMLDataBase implements DataBaseEntity {
         return self::$instance;
     }
 
-    private function getPath() {
-        $path = "users/xml/registration_".date('d_m_Y').".xml";
-        return $path;
-    }
-
-    function createDataSource() {
-        mkdir('users', 0777);
-        mkdir('users/xml', 0777);
-    }
+    private function getPath() { return "users/xml/registration_".date('d_m_Y').".xml"; }
 
     function createRecord() {
         if (!file_exists(self::getPath())) {
@@ -35,7 +30,7 @@ class XMLDataBase implements DataBaseEntity {
 
     function checkEmail($email, $response) {
         $doc = new DOMDocument();
-        $doc->load(self::getPath());
+        $doc->load($this->getPath());
 
         $emails = $doc->getElementsByTagName("email");
 

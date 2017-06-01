@@ -1,30 +1,25 @@
 <?php
 
 class MySqlDataBase implements DataBaseEntity {
+
     private static $instance = null;
-    private function __construct() {}
+    private function __construct() {
+        $this->conn = new PDO('mysql:host='. $this->host ,  $this->username,  $this->password);
+        $this->conn->exec("CREATE DATABASE IF NOT EXISTS ". $this->database);
+        $this->conn->exec("use ". $this->database);
+    }
     private function __clone() {}
+    private $conn = null;
+    private $host = 'localhost';
+    private $username = 'root';
+    private $password = 'root';
+    private $database = 'andreyBabenkoDB';
 
     static function getInstance() {
         if (null === self::$instance) {
             self::$instance = new self();
         }
         return self::$instance;
-    }
-
-    private static $host = 'localhost';
-    private static $username = 'root';
-    private static $password = 'root';
-    private static $database = 'andreyBabenkoDB';
-
-    private function openConn() {
-        $conn = new PDO('mysql:host='.self::$host.';dbname='.self::$database , self::$username, self::$password);
-        return $conn;
-    }
-
-    function createDataSource() {
-        $conn = new PDO('mysql:host='.self::$host , self::$username, self::$password);
-        $conn->exec("CREATE DATABASE IF NOT EXISTS ".self::$database);
     }
 
     function createRecord() {
@@ -38,16 +33,14 @@ class MySqlDataBase implements DataBaseEntity {
                           PRIMARY KEY (id)
                           )
         ";
-        $conn = self::openConn();
-        $conn->exec($createTableQuery);
+        $this->conn->exec($createTableQuery);
     }
 
     function checkEmail($email, $response) {
         $selectTodayEmail = "SELECT email FROM users
                           WHERE DATE(regdate) = CURDATE() 
      ";
-        $conn = self::openConn();
-        $stmt = $conn->query($selectTodayEmail);
+        $stmt = $this->conn->query($selectTodayEmail);
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($row['email'] == $email) {
                 $response['errors']++;
@@ -59,10 +52,9 @@ class MySqlDataBase implements DataBaseEntity {
     }
 
     function addUser($firstname, $lastname, $email, $ticketType) {
-        $conn = self::openConn();
         $addNewUserQuery = "INSERT INTO users (firstname, lastname, email, ticketType)
                               VALUES ('$firstname', '$lastname', '$email', '$ticketType')
          ";
-        $conn->exec($addNewUserQuery);
+        $this->conn->exec($addNewUserQuery);
     }
 }

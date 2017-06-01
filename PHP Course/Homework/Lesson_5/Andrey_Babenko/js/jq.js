@@ -119,6 +119,7 @@ jQuery(document).ready(function($) {
                     data: data,
                     success: function(response) {
                         response = jQuery.parseJSON(response);
+                        // console.log(response);
                         showErrors(response);
                         showResponsText(response);
                         refreshCaptcha();

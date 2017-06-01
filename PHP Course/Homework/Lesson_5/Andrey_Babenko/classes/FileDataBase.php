@@ -2,8 +2,13 @@
 
 class FileDataBase implements DataBaseEntity {
     private static $instance = null;
-    private function __construct() {}
+    private function __construct() {
+        mkdir('users', 0777);
+        mkdir('users/txt', 0777);
+        $this->conn = fopen($this->getPath(), 'a+');
+    }
     private function __clone() {}
+    private $conn = null;
 
     function getInstance() {
         if (null === self::$instance) {
@@ -12,30 +17,14 @@ class FileDataBase implements DataBaseEntity {
         return self::$instance;
     }
 
-    private function getPath() {
-        $path = "users/txt/registration_".date('d_m_Y').".txt";
-        return $path;
-    }
+    private function getPath() { return "users/txt/registration_".date('d_m_Y').".txt"; }
 
-    private function openConn() {
-        $conn = fopen(self::getPath(), 'a+');
-        return $conn;
-    }
-
-    function createDataSource() {
-        mkdir('users', 0777);
-        mkdir('users/txt', 0777);
-    }
-
-    function createRecord() {
-        //Empty function
-    }
+    function createRecord() { }
 
     function checkEmail($email, $response) {
-        $fileContent = file(self::getPath(), FILE_SKIP_EMPTY_LINES);
-        $users = new UsersIterator($fileContent);
-        foreach ($users as $userDataString) {
-            $userData = explode(",", $userDataString);
+        $file = new SplFileObject($this->getPath());
+        foreach($file as $line) {
+            $userData = explode(",", $line);
             if ($userData[2] == $email) {
                 $response['errors']++;
                 $response['responseText'] = 'User with such e-mail is already registered';
@@ -46,8 +35,8 @@ class FileDataBase implements DataBaseEntity {
     }
 
     function addUser($firstname, $lastname, $email, $ticketType) {
-        $conn = self::openConn();
-        fwrite($conn, $firstname.",".$lastname.",".$email.",".$ticketType."\n");
-        fclose($conn);
+        fwrite($this->conn, $firstname.",".$lastname.",".$email.",".$ticketType."\n");
+        fclose($this->conn);
     }
 }
+
