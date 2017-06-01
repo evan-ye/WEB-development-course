@@ -28,10 +28,9 @@
    <option value="premium">Premium</option>
   </select>
   <br><br>
-<img src='captcha.php' id='capcha-image'>
+<img src='captcha.php' id='captcha-image'>
 <span>Type the text below:</span>
-  <input type="text" name="capcha" placeholder="" required>
-
+  <input type="text" name="captcha" placeholder="" required>
 
     <input type="submit" name="submit" id="submit" value="Submit">
 </form>
