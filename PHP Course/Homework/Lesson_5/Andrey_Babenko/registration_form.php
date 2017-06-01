@@ -21,17 +21,12 @@ $ticketType = $data['ticketType'];
 $checkText = $data['checkText'];
 $saveOption = $data['saveOption'];
 
-// From validation
 $response = FormValidator::validateAll($firstname, $lastname, $email, $ticketType, $checkText);
 
-if (!Captcha::checkCaptcha($checkText)) {
-    $response['errors']++;
-}
+if (!Captcha::checkCaptcha($checkText)) { $response['errors']++; }
 
-// Main logic
 if (!$response['errors']) {
     $database = DataBaseFactory::createDataBase($saveOption);
-    $database->createDataSource();
     $database->createRecord();
     $response = $database->checkEmail($email, $response);
     if (!$response['errors']) {
@@ -39,5 +34,4 @@ if (!$response['errors']) {
         $response['responseText'] = "New user created successfully";
     }
 }
-$jsonResponse = json_encode($response);
-echo $jsonResponse;
+echo json_encode($response);
