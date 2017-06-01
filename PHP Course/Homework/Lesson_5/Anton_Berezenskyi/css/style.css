@@ -1,0 +1,48 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font: 20px sans-serif;
+}
+form {
+	width: 100%;
+	max-width: 600px;
+	margin: 50px auto 0;
+}
+form input {
+	width: 100%;
+	margin-bottom: 20px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid #959595;
+	padding: 10px 0 0 0;
+}
+form select {
+	margin-top: 5px;
+	margin-bottom: 20px;
+	outline: none;
+	width: 100%;
+}
+form input[type="submit"] {
+	border: none;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	padding: 10px 0;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+form input:disabled {
+	background: rgba(0, 0, 0, 0.2);;
+}
+.response {
+	color: #fb4141;
+	text-align: center;
+}
+.response-name,
+.response-lastname,
+.response-email {
+	color: #fb4141;
+	font-size: 14px;
+	display: none;
+	margin-top: -10px;
+}

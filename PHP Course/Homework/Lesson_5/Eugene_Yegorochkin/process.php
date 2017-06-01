@@ -6,6 +6,7 @@ if (isset($HTTP_RAW_POST_DATA)) {
 }
 
 session_start();
+
 if ($_POST['captcha'] != $_SESSION['captcha'])
     echo "The letters in the graphic were entered incorrectly. Please try again.";
 else {
@@ -31,7 +32,7 @@ else {
     $conn->close();
     
     $conn = new mysqli($servername, $username, $password, 'myDB');
-    
+
     $createTable = "CREATE TABLE IF NOT EXISTS users(
                           id int(4) NOT NULL auto_increment,
                           firstname varchar(50) NOT NULL default '',
@@ -53,10 +54,14 @@ else {
             echo "This email already exists. Please try another email";
             return false;
         } else {
+
             
             $sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
+
+
                               VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
         }
+
         
     }
     
@@ -66,6 +71,8 @@ else {
         echo "This email already exists. Please try another email";
     }
     
+
+
     $conn->close();
     
 }

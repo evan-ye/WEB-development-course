@@ -1,0 +1,195 @@
+
+Запрос SELECT
+
+
+SELECT user_name, email
+     FROM users
+     ORDER BY user_name
+
+
+Сортировка по заданному полю в обратном порядке:
+
+SELECT user_name, email
+    FROM users
+    ORDER BY user_name DESC
+
+
+Выбор записей по критериям:
+
+SELECT user_name
+     FROM users
+     WHERE id > 2
+
+
+Выбор всех полей из таблицы (можно использовать только для отладки)
+SELECT *
+     FROM categories
+     WHERE parent = 2
+     AND category_name LIKE 'Te%'
+
+
+
+SELECT: oбъединение таблиц
+
+SELECT u.user_name, u.email, p.category
+    FROM users u
+    INNER JOIN pages p ON u.id = p.author
+
+
+SELECT u.user_name, u.email, p.category
+    FROM users u
+    LEFT OUTER JOIN pages p ON u.id = p.author
+
+
+
+Объединение 3-х таблиц:
+
+SELECT u.user_name
+    FROM users u INNER JOIN
+     (pages INNER JOIN categories
+       ON pages.category = categories.tid)
+     ON u.id = pages.author
+    WHERE categories.category_name LIKE 'Te%'
+    ORDER BY u.user_name
+
+
+Устранение дубликатов в выборке
+
+SELECT DISTINCT u.user_name
+    FROM users u INNER JOIN
+     (pages INNER JOIN categories
+       ON pages.category = categories.tid)
+     ON u.id = pages.author
+    WHERE categories.category_name LIKE 'Te%'
+    ORDER BY u.user_name
+
+
+
+
+Запрос INSERT
+
+INSERT INTO categories (category_name, parent)
+    VALUES ('Newcat', 2)
+
+
+Если мы используем запись просто с именем таблицы мы обязаны вставить данные во все колонки которые есть в таблице:
+
+INSERT INTO categories
+    VALUES (null, 'Newcat', 2)
+
+
+
+Запрос DELETE
+
+DELETE FROM pages
+     WHERE pages.date = '2017-03-09'
+
+
+Такая запись удалит все записи из указанной таблицы:
+
+DELETE FROM pages
+
+
+
+Запрос TRUNCATE
+
+C помощью TRUNCATE также можно удалить все данные из таблицы
+
+TRUNCATE pages
+
+
+
+Запрос UPDATE
+
+UPDATE categories
+SET
+category_name = 'New',
+parent = 7
+WHERE category_name LIKE 'Newc%'
+
+
+Если не указать условия WHERE проапдейтятся все записи в таблице
+
+
+В уcловии можно также использовать IN
+
+UPDATE categories
+SET
+parent = 7
+WHERE category_name IN
+('Tech', 'Blog')
+
+
+
+
+Запрос REPLACE
+
+Обновление записи
+
+REPLACE INTO users(id,user_name)
+VALUES(3,'Jackie Chan');
+
+
+Вставка новой записи
+
+REPLACE INTO users(user_name)
+VALUES('Bruce Lee');
+
+
+REPLACE INTO users(id,user_name)
+VALUES(100,'Jackie Chan');
+
+
+
+Создание базы данных и таблицы (MySQL)
+
+CREATE TABLE news (
+  id int(4) NOT NULL auto_increment,
+  title varchar(255) NOT NULL default '',
+  description varchar(255) NOT NULL default '',
+  content text,
+  author varchar(50) NOT NULL default '',
+  pubdate timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+)
+
+
+
+
+
+
+
+Работа с сервером через утилиты командной строки
+
+Вход в монитор mysql:
+mysql [-hlocalhost] [-port=13306] –uлогин –pпароль db_name
+
+Если используем MAMP:
+/Applications/MAMP/Library/bin/mysql --host=localhost -uroot -proot
+
+
+Примеры команд
+USE db_name;          // Переключение на базу данных
+SET NAMES 'cp866';    // Установка кодировки в мониторе
+SHOW TABLES;          // Показать список таблиц в базе данных
+DESCRIBE имя_таблицы; // Показать структуру полей таблицы
+quit / exit           // Выход из монитора.
+
+Создание дампа:
+mysqldump –uroot –ppass db_name > dump.sql
+
+Загрузка дампа:
+mysql –uroot –ppass имя_БД < dump.sql
+
+
+Создание дампа с архивацией:
+/Applications/MAMP/Library/bin/mysqldump --opt --single-transaction -hlocalhost -uroot -proot webdev | gzip -c >  dump_20.04.2017.sql.tar.gz
+
+
+Загрузка дампа из архива .gz (на Linux):
+zcat /path/to/file.sql.gz | mysql -uroot -ppass your_database
+
+
+Загрузка дампа из архива .gz (на MAC):
+zcat < /path/to/file.sql.gz | mysql -uroot -ppass your_database
+

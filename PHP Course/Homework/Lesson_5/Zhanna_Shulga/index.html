@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Registration form</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+		input,select {float:left;clear:left; }
+		form label{clear:left; float: left; margin-top: 10px;}
+		form button {clear:left; float: left; margin-top: 10px; }
+		.error {
+			color: red;
+			width: auto;
+		}
+		.response {
+			color:red;
+
+		}
+	</style>
+</head>
+<body>
+	<form id="registrationForm" action="registrationForm.php" method="POST">
+		<label>First name</label>
+			<input type="text" id="firstName" name="firstName">
+		<label>Last name</label>
+			<input type="text" id="lastName" name="lastName">
+		<label>Email</label>
+			<input type="email" id="email" name="email">
+		<label>Ticket type</label>
+			<select id="ticketType" name= "ticketType">
+				<option selected>Free</option>
+				<option>Standard</option>
+				<option>Premium</option>
+			</select>
+		<button type="submit" id="send">Send</button>
+		<p class="response"></p>
+	</form>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.validate.js"></script>
+<script src="js/myscript.js"></script>
+</body>
+</html>
