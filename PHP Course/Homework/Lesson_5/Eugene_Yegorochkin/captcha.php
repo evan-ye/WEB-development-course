@@ -27,9 +27,7 @@ $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     imagettftext($im, $fontsize, $angle, $x, $y, $curcolor, $font, $captcha[$i]);
   }
 
-
   session_start();
-  $_SESSION['capcha'] = $captcha;
+  $_SESSION['captcha'] = $captcha;
 
   imagepng($im); 
-  imagedestroy($im); 
