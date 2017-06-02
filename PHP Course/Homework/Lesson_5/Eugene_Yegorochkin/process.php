@@ -10,27 +10,27 @@ session_start();
 if ($_POST['captcha'] != $_SESSION['captcha'])
     echo "The letters in the graphic were entered incorrectly. Please try again.";
 else {
-    
-    
+
+
     $data = array();
     parse_str($inputs, $data);
     $firtsname   = $data['firstname'];
     $lastname    = $data['lastname'];
     $email       = $data['email'];
     $ticket_type = $data['ticket_type'];
-    
+
     $servername = "localhost";
     $username   = "root";
-    $password   = ""; // type your password here if it needed
-    
+    $password   = "root"; // type your password here if it needed
+
     $conn = mysqli_connect($servername, $username, $password);
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    
+
     $conn->query("CREATE DATABASE IF NOT EXISTS myDB");
     $conn->close();
-    
+
     $conn = new mysqli($servername, $username, $password, 'myDB');
 
     $createTable = "CREATE TABLE IF NOT EXISTS users(
@@ -43,37 +43,33 @@ else {
                           PRIMARY KEY (id)
                           )";
     $conn->query($createTable);
-    
-    
-    
+
+
+
     $result = mysqli_query($conn, "SELECT email FROM users WHERE DATE(regdate) = CURDATE()");
-    
-    
+
+
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         if ($row['email'] == $email) {
             echo "This email already exists. Please try another email";
             return false;
-        } else {
+        }
+    }
 
-            
-            $sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
+    $sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
 
 
                               VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
-        }
 
-        
-    }
-    
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
     } else {
         echo "This email already exists. Please try another email";
     }
-    
+
 
 
     $conn->close();
-    
+
 }
 ?>
