@@ -19,21 +19,19 @@ else {
     $email       = $data['email'];
     $ticket_type = $data['ticket_type'];
     
-    $servername = "localhost";
-    $username   = "root";
-    $password   = ""; // type your password here if it needed
-    
-    $conn = mysqli_connect($servername, $username, $password);
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-    
-    $conn->query("CREATE DATABASE IF NOT EXISTS myDB");
-    $conn->close();
-    
-    $conn = new mysqli($servername, $username, $password, 'myDB');
+    if ($save_option === "mysql") {
+	$servername = "localhost";
+	$username = "root";
+	$password = "root"; // type your password here if it needed
+	$conn = mysqli_connect($servername, $username, $password);
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
 
-    $createTable = "CREATE TABLE IF NOT EXISTS users(
+	$conn->query("CREATE DATABASE IF NOT EXISTS myDB");
+	$conn->close();
+	$conn = new mysqli($servername, $username, $password, 'myDB');
+	$createTable = "CREATE TABLE IF NOT EXISTS users(
                           id int(4) NOT NULL auto_increment,
                           firstname varchar(50) NOT NULL default '',
                           lastname varchar(50) NOT NULL default '',
@@ -42,38 +40,55 @@ else {
                           regdate timestamp NOT NULL default CURRENT_TIMESTAMP,
                           PRIMARY KEY (id)
                           )";
-    $conn->query($createTable);
-    
-    
-    
-    $result = mysqli_query($conn, "SELECT email FROM users WHERE DATE(regdate) = CURDATE()");
-    
-    
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        if ($row['email'] == $email) {
-            echo "This email already exists. Please try another email";
-            return false;
-        } else {
-
-            
-            $sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
-
-
+	$conn->query($createTable);
+	$result = mysqli_query($conn, "SELECT email FROM users WHERE DATE(regdate) = CURDATE()");
+	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+		if ($row['email'] == $email) {
+			echo "This email already exists. Please try another email";
+			return false;
+		}
+		else {
+			$sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
                               VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
-        }
+		}
+	}
 
-        
-    }
-    
-    if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "This email already exists. Please try another email";
-    }
-    
+	$sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
+                              VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
+	if (mysqli_query($conn, $sql)) {
+		echo "New record created successfully";
+	}
+	else {
+		echo "This email already exists. Please try another email";
+	}
 
-
-    $conn->close();
-    
+	$conn->close();
+}
+else {
+	$filelist = glob("*.txt");
+	if ($filelist) {
+		foreach(glob("*.txt") as $filename) {
+			if (strpos(file_get_contents("$filename") , "$email")) {
+				echo "This email already exists. Please try another email";
+			}
+			else {
+				$newFile = fopen("registration_" . date("d_m_Y") . ".txt", "a+");
+				$mytext = "$firstname,$lastname,$email,$ticket_type\n";
+				$test = fwrite($newFile, $mytext);
+				if ($test) echo 'New record created successfully';
+				else echo 'Error saving information.';
+				fclose($newFile);
+			}
+		}
+	}
+	else {
+		$newFile = fopen("registration_" . date("d_m_Y") . ".txt", "a+");
+		$mytext = "$firstname,$lastname,$email,$ticket_type\n";
+		$test = fwrite($newFile, $mytext);
+		if ($test) echo 'New record created successfully';
+		else echo 'Error saving information.';
+		fclose($newFile);
+	}
+}
 }
 ?>
