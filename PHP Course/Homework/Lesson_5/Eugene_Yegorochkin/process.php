@@ -10,14 +10,15 @@ session_start();
 if ($_POST['captcha'] != $_SESSION['captcha'])
     echo "The letters in the graphic were entered incorrectly. Please try again.";
 else {
-    
-    
+
+
     $data = array();
     parse_str($inputs, $data);
     $firtsname   = $data['firstname'];
     $lastname    = $data['lastname'];
     $email       = $data['email'];
     $ticket_type = $data['ticket_type'];
+
     
     if ($save_option === "mysql") {
 	$servername = "localhost";
@@ -27,6 +28,7 @@ else {
 	if (!$conn) {
 		die("Connection failed: " . mysqli_connect_error());
 	}
+
 
 	$conn->query("CREATE DATABASE IF NOT EXISTS myDB");
 	$conn->close();
@@ -40,6 +42,7 @@ else {
                           regdate timestamp NOT NULL default CURRENT_TIMESTAMP,
                           PRIMARY KEY (id)
                           )";
+
 	$conn->query($createTable);
 	$result = mysqli_query($conn, "SELECT email FROM users WHERE DATE(regdate) = CURDATE()");
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -52,6 +55,7 @@ else {
                               VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
 		}
 	}
+
 
 	$sql = "INSERT INTO users (firstname, lastname, email, ticket_type)
                               VALUES ('$firtsname', '$lastname', '$email', '$ticket_type')";
@@ -90,5 +94,6 @@ else {
 		fclose($newFile);
 	}
 }
+
 }
 ?>
