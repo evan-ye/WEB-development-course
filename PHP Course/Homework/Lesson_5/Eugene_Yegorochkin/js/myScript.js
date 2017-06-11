@@ -1,67 +1,76 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
     $("#signup").validate({
 
-       rules:{
+        rules: {
 
-            firstname:{
+            firstname: {
                 required: true,
                 minlength: 2,
                 maxlength: 20,
             },
 
-            lastname:{
+            lastname: {
                 required: true,
                 minlength: 2,
                 maxlength: 20,
             },
 
-            email:{
+            email: {
                 required: true,
                 email: true,
             },
 
-            ticket_type:{
+            ticket_type: {
                 required: true,
-                
+
             },
-       },
 
-       messages:{
+            save_option: {
+                required: true,
 
-            firstname:{
+            },
+        },
+
+        messages: {
+
+            firstname: {
                 required: " Please provide a first name",
                 minlength: " Your first name must consist of at least 2 characters",
                 maxlength: " Your first name must consist of at max 20 characters",
             },
 
-            lastname:{
+            lastname: {
                 required: " Please provide a last name",
                 minlength: " Your last name must consist of at least 2 characters",
                 maxlength: " Your last name must consist of at max 20 characters",
             },
 
-            email:{
+            email: {
                 required: " Please provide a email",
             },
 
-            ticket_type:{
+            ticket_type: {
                 required: " Please choose a ticket type",
             },
 
-       }
+            save_option: {
+                required: " Please choose save option",
+            },
+
+        }
 
     });
 
 });
 
-	$('#signup').submit(function(event){
-        event.preventDefault();
-        if ($('form').valid()) {
+$('#signup').submit(function(event) {
+    event.preventDefault();
+    if ($('form').valid()) {
         var data = $(this).serialize();
         console.log(data);
-        $.post("process.php", data, function(response){
+        $.post("process.php", data, function(response) {
             alert(response);
         })
-      }
-    });
+    }
+});
