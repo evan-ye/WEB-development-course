@@ -27,12 +27,15 @@
    <option value="standart">Standart</option>
    <option value="premium">Premium</option>
   </select>
-  <span>Option to save:</span> 
+<br>
+<span>Option to save:</span> 
   <select name="save_option" id="save_option" id = "defaultSelector" required>
    <option  value="" disabled selected>Select your save option</option>
    <option value="mysql">MySQL</option>
    <option value="file">File</option>
+   <option value="xml">XML</option>
   </select>
+
   <br><br>
 <img src='captcha.php' id='captcha-image'>
 <span>Type the text below:</span>
